@@ -1,0 +1,59 @@
+<%-include('common/head.ejs')-%>
+<title>Hospital Management System</title>
+</head>
+<body>
+<div id="container">
+  
+    <%-include('common/sidebar.ejs')-%>
+  <div id="content">
+    <h1>Admin</h1>
+    
+    <button class="btn" id="dept">
+      <a href="/admin/dept">
+
+          Department
+      </a>
+    </button>
+    <button
+      class="btn"
+      id="add-department"
+      
+      
+    >
+    <a href="/admin/add-dept">
+
+        Add department
+    </a>
+    </button>
+    
+          <form id="addDepartmentForm" action="/admin/add-dept/" method="post">
+            <form action="process_department_form.php" method="post">
+              <table>
+                <tr>
+                  <th colspan="2">Department Information</th>
+                </tr>
+               
+                <tr>
+                  <td>Department Name:</td>
+                  <td><input type="text" name="department_name"></td>
+                </tr>
+                <tr>
+                  <td>Head of Department:</td>
+                  <td><input type="text" name="head_of_department"></td>
+                </tr>
+                <tr>
+                  <td>Description:</td>
+                  <td><textarea name="description" rows="4" cols="50"></textarea></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" value="Add Department" /></td>
+                </tr>
+</table>          
+          
+            <!-- Add other form fields as needed -->
+          </form>
+        </div>
+  </div>
+
+<%-include('common/footer.ejs')-%>

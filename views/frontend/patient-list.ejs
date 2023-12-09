@@ -1,0 +1,57 @@
+<%- include('common/head.ejs') %>
+<title>Hospital Management System</title>
+</head>
+<body>
+  <div id="container">
+    <%- include('common/sidebar.ejs') %>
+    <div id="content">
+      <h1>Admin</h1>
+
+      <button class="btn" id="pat">
+        <a href="/admin/patient" class="routes">Patient</a>
+      </button>
+      <button class="btn" id="add-pat">
+        <a href="/admin/add-patient" class="routes">Add patient</a>
+      </button>
+
+      <form id="pat-form" class="form3 active-active">
+        <div class="search-container">
+          <input type="text" id="search" placeholder="Search" />
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Patient ID</th>
+              <th>Patient Name</th>
+              <th>Blood group</th>
+              <th>DOB</th>
+              <th>Mobile No.</th>
+              <th>Email</th>
+              <th>Gender</th>
+              <th>Address</th>
+              <th>Actions</th>
+              <!-- Add other table headers as needed -->
+            </tr>
+          </thead>
+          <tbody>
+           <% patients.forEach((row,index) => { %>
+            <tr>
+              <td><%= index+1 %></td>
+              <td><%= row.patientname %></td>
+              <td><%= row.bloodGroup  %></td>
+              <td><%= row.dob  %></td>
+              <td><%= row.phoneNo  %></td>
+              <td><%= row.email  %></td>
+              <td><%= row.gender  %></td>
+              <td><%= row.address  %></td>
+              <td><button class="btn-list"><a href="/admin/patient/edit/<%= row._id %>">Edit</a></button>
+              <button class="btn-list"><a href="/admin/patient/delete/<%= row._id %>">Delete</a></button>
+            </tr>
+           <% }) %>
+          </tbody>
+        </table>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

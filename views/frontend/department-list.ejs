@@ -1,0 +1,60 @@
+<%- include('common/head.ejs') -%>
+<title>Hospital Management System</title>
+</head>
+<body>
+    <div id="container">
+        <%- include('common/sidebar.ejs') -%>
+        <div id="content">
+            <h1>Admin</h1>
+
+            
+            <button class="btn" id="dept">
+              <a href="/admin/dept" >
+
+                  Department
+              </a>
+            </button>
+            <button
+              class="btn"
+              id="add-department"
+              
+              
+            >
+            <a href="/admin/add-dept" >
+                Add department
+            </a>
+            </button>
+        
+                    <!-- <div id="dept-form" class="form active-active"> -->
+                      <div class="search-container">
+                        <input type="text" id="search" placeholder="Search" />
+                      </div>
+                      <form >
+                      <table>
+                          <tr>
+                            <th>Department ID</th>
+                            <th>Department Name</th>
+                            <th>HOD</th>
+                            <th>Description</th>
+                            <th>Actions</th>
+                          </tr>
+                       <tbody>
+                        <% dept.forEach((row,index) => { %>
+                            <tr>
+                              <td><%= index+1  %></td>
+                              <td><%= row.deptname %></td>
+                              <td><%= row.hod %></td>
+                              <td><%= row.description %></td>
+                              <td><button class="btn-list" ><a href="/admin/dept/edit/<%= row._id %>">Edit</a></button>
+                                <button class="btn-list" ><a href="/admin/dept/delete/<%= row._id %>">Delete</a></button></td>
+                             </tr>
+                            </tr>
+                        <% }) %>
+                       </tbody>
+                      </table>
+                    </form>
+                    </div>
+                    
+                  <!-- </div> -->
+    </div>
+    <%- include('common/footer.ejs') -%>

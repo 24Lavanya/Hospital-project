@@ -1,0 +1,108 @@
+<%-include('common/head.ejs')-%>
+<title>Hospital Management System</title>
+</head>
+<body>
+<div id="container">
+  
+    <%-include('common/sidebar.ejs')-%>
+  <div id="content">
+    <h1>Admin</h1>
+
+    
+    <form id="addDoctorForm" action="/admin/doctor/edit/<%= doctor._id %>" method="post">
+      <h2 align="center">Edit Doctor</h2>
+      <table align="center">
+        <tr>
+          <td><label>Name:</label></td>
+          <td>
+            <input
+              type="text"
+              id="doctorName"
+              name="doctorName"
+              placeholder="Enter your name"
+              value="<%= doctor.doctorname%>"
+              required
+            /><br />
+          </td>
+        </tr>
+        <tr>
+          <td><label>Mobile No:</label></td>
+          <td><input
+              type="text"
+              name="Mobile"
+              size="10"
+              pattern="[0-9]{10}"
+              value="<%= doctor.phoneNo%>"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td><label>Birth Date:</label></td>
+          <td>
+            <input
+              type="date"
+              name="dob"
+              id="dob"
+              placeholder="dd/mm/yyyy"
+              value="<%= doctor.dob%>"
+              required
+            />
+          </td>
+        </tr>
+        <tr>
+          <td><label>Gender:</label></td>
+          <td>
+            <input type="radio" id="male" name="gender" value="male" <%= doctor.gender === 'male' ? 'checked' : '' %> required>
+            <label for="male">Male</label>
+            
+            <input type="radio" id="female" name="gender" value="female" <%= doctor.gender === 'female' ? 'checked' : '' %> required>
+            <label for="female">Female</label>
+        </td>
+        </tr>
+        <tr>
+          <td><label>Department:</label></td>
+          <td>
+            <select name="dept"  value="<%= doctor.department%>">
+              <option>Cardiology</option>
+              <option>Dermatology</option>
+              <option>Gynaecology</option>
+              <option>Neurology</option>
+              <option>Opthalmology</option>
+              <option>Orthopedics</option>
+              <option>Pediatrics</option>
+              <option>Physiotherapy</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td><label>Email:</label></td>
+          <td>
+            <input
+              type="email"
+              name="email"
+              placeholder="Enter Your Email"
+              value="<%= doctor.email%>"
+            /><br />
+          </td>
+        </tr>
+        <tr>
+          <td><label>Address:</label></td>
+          <td>
+            <textarea
+              name="address"
+              rows="3"
+              cols="30"
+              placeholder="Enter your address"
+            ><%= doctor.address%></textarea>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <input type="submit" class="btn" value="Update doctor" />
+            <input type="reset" value="Reset" />
+          </td>
+        </tr>
+      </table>
+    </form>
+    <br />

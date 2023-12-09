@@ -1,0 +1,40 @@
+<%-include('common/head.ejs')-%>
+<title>Hospital Management System</title>
+</head>
+<body>
+<div id="container">
+  
+    <%-include('common/sidebar.ejs')-%>
+  <div id="content">
+    <h1>Admin</h1>
+    
+    
+          <form id="addDepartmentForm" action="/admin/dept/edit/<%= depts._id %>" method="post">
+            <h2 align="center">Edit Department</h2>
+              <table>
+               
+                <tr>
+                  <td>Department Name:</td>
+                  <td><input type="text" name="department_name" value="<%= depts.deptname %>"></td>
+                </tr>
+                <tr>
+                  <td>Head of Department:</td>
+                  <td><input type="text" name="head_of_department" value="<%= depts.hod %>"></td>
+                </tr>
+                <tr>
+                  <td>Description:</td>
+                  <td><textarea name="description" rows="4" cols="50"><%= depts.description %></textarea></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" value="Update Department" />
+                    <input type="reset" value="Reset" /></td>
+                </tr>
+</table>          
+          
+            <!-- Add other form fields as needed -->
+          </form>
+        </div>
+  </div>
+
+<%-include('common/footer.ejs')-%>
