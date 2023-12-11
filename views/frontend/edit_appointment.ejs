@@ -8,48 +8,37 @@
   <div id="content">
     <%-include('common/welcome.js')  %>
 
-    <button class="btn" id="appo">
-      <a href="/admin/appointment" >
-
-          Appointment
-      </a>
-    </button>
-    <button class="btn" id="add-appo" >
-        <a href="/admin/add-appointment" >
-            Add appointment
-        </a>
-    </button>
-    <form id="addAppoForm" action="/admin/add-appointment" method="post">
+    <form id="addAppoForm" action="/admin/appointment/edit/<%= appointment._id %>" method="post">
       <h2 align="center">Appointment Details</h2>
       <table>
         <tr>
           <td><label for="patientName">Patient Name</label></td>
-          <td><input type="text" id="patientName" name="patientName" required></td>
+          <td><input type="text" id="patientName" name="patientName" required value="<%= appointment.patientName %>"></td>
         </tr>
         <tr>
           <td><label for="doctorname">Doctor Name</label></td>
-          <td><input type="text" id="doctorname" name="doctorname" required></td>
+          <td><input type="text" id="doctorname" name="doctorname" required value="<%= appointment.doctorname %>"></td>
         </tr>
         <tr>
           <td><label for="phone">Phone Number</label></td>
-          <td><input type="number" id="phone" name="phone" required></td>
+          <td><input type="number" id="phone" name="phone" required value="<%= appointment.phone %>"></td>
         </tr>
         <tr>
           <td><label for="date">Preferred Date</label></td>
-          <td><input type="date" id="date" name="date" required></td>
+          <td><input type="date" id="date" name="date" required value="<%= appointment.date %>"></td>
         </tr>
         <tr>
           <td><label for="time">Preferred Time</label></td>
-          <td><input type="time" id="time" name="time" required></td>
+          <td><input type="time" id="time" name="time" required value="<%= appointment.time %>"></td>
         </tr>
         <tr>
           <td><label for="message">Additional Information</label></td>
-          <td><textarea id="message" name="message" rows="4"></textarea></td>
+          <td><textarea id="message" name="message" rows="4"><%= appointment.message %></textarea></td>
         </tr>
         <tr>
           <td></td>
           <td>
-            <input type="submit" value="Book appointment" />
+            <input type="submit" value="Update appointment" />
           </td>
         </tr>
       </table>

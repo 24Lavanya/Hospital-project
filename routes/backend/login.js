@@ -40,7 +40,7 @@ router.post("/login", passport.authenticate("local", {
     if (username.toLowerCase() === 'admin') {
       res.redirect("/admin");
     } else {
-      res.redirect("/profile");
+      res.redirect("/new");
     }
   });
 router.get("/logout", function (req, res) {

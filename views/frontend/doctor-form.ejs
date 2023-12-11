@@ -6,7 +6,7 @@
   
     <%-include('common/sidebar.ejs')-%>
   <div id="content">
-    <h1>Admin</h1>
+    <%-include('common/welcome.js')  %>
 
     <button class="btn" id="doc">
       <a href="/admin/doctor" >
@@ -57,14 +57,18 @@
           </td>
         </tr>
         <tr>
+          <td><label>Experience</label></td>
+          <td><input type="number" name="exp" ></td>
+        </tr>
+        <tr>
           <td><label>Gender:</label></td>
           <td>
-            <label for="male">Male</label>
+            <label for="male">Male
             <input type="radio" id="male" name="gender" value="male" required>
-            
-            <label for="female">Female</label>
+          </label>
+            <label for="female">Female
             <input type="radio" id="female" name="gender" value="female" required>
-          </td>
+          </label></td>
         </tr>
         <tr>
           <td><label>Department:</label></td>

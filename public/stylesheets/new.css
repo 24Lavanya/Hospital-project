@@ -205,8 +205,9 @@
     margin-left: 20px;
   }
   .banner-content h1{
-    color: navy;
+    color: black;
     font-size: 50px;
+    text-shadow: 6px 6px #ffffff;
     font-weight: 800;
     line-height: 80px;
   }
@@ -245,15 +246,10 @@
 
   /* WORKING HOURS */
   .work{
-    position: relative;
-    display: flex;
-    flex-direction: column; 
       justify-content: center;
     align-items: center;
 }
-.row{
-    display: flex;
-}
+
 .hours{
     display: flex;
     flex-direction: column;
@@ -297,3 +293,17 @@
   .btn-white i{
    margin-right: 4px; 
   }
+
+  /* Doctors */
+.swiper {
+  width: 600px;
+}
+.card{
+  padding: 4em;
+  margin: auto;
+}
+.card img{
+  border-radius: 100%;
+  width: 200px;
+  height: 200px;
+}

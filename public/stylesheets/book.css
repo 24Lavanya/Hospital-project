@@ -2,7 +2,7 @@
   .container-appointment {
     background-color: #fff;
     border-radius: 8px;
-    margin: auto;
+    margin: 30px auto;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 12px;
     /* width: 400px; */
@@ -20,7 +20,16 @@
       justify-content: center;
       flex-direction: column;
     }
-  
+    .alert-container{
+      padding: 8px;
+      /* border:2px solid red; */
+    }
+    .book-alert{
+      background-color: #4BB543;
+    }
+    .book-alert p{
+      padding: 12px;
+    }
   .container-appointment  h1 {
     text-align: center;
     color: #333;

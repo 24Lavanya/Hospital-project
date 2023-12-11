@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/stylesheets/new.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;1,200;1,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/book.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;1,200;1,300&display=swap"
+        rel="stylesheet">
     <script src="index.js"></script>
 </head>
+
 <body>
     <div class="navbar">
         <div class="logo">
@@ -22,24 +27,24 @@
             </ul>
         </div>
         <div class="right">
-                <a href="/logout" class="btn-green mt-20px">
-                    <i class="fas fa-calendar-week"></i>Book an appointment
-                </a>
-                <a href="/logout" class="btn-green mt-20px">
-                    Logout
-                </a>
+            <a href="#book" class="btn-green mt-20px">
+                <i class="fas fa-calendar-week"></i>Book an appointment
+            </a>
+            <a href="/logout" class="btn-green mt-20px">
+                Logout
+            </a>
         </div>
     </div>
     <section class="banner">
         <div class="banner-content">
-            <h1> Our expertise at your service</h1>       
-            </div>
+            <h1> Our expertise at your service</h1>
+        </div>
         <video autoplay loop muted>
             <source src="/images/pexels-ron-lach-7579331 (2160p).mp4" type="video/mp4">
         </video>
     </section>
     <div class="service">
-        <a href="javascript:void(0);">
+        <a href="#services-provided">
             <div class="service-content">
                 Our Service Providers
                 <div class="service-icon">
@@ -48,12 +53,12 @@
             </div>
 
         </a>
-        <a href="javascript:void(0);">
+        <a href="#book">
             <div class="service-content">
-              Book an Appointment
-              <div class="service-icon">
-                  <i class="fas fa-calendar"></i>
-              </div>
+                Book an Appointment
+                <div class="service-icon">
+                    <i class="fas fa-calendar"></i>
+                </div>
             </div>
 
         </a>
@@ -61,74 +66,153 @@
             <div class="service-content">
                 Have an emergency ?
                 <div class="service-icon">
-                        <i class="fas fa-phone-volume"></i>
-                    </div>
+                    <i class="fas fa-phone-volume"></i>
                 </div>
-                <div class="call-number">
-                    <p>Emergency Line</p>
-                    <h3>123-456-789</h3>
-                </div>
+            </div>
+            <div class="call-number">
+                <p>Emergency Line</p>
+                <h3>123-456-789</h3>
+            </div>
 
         </a>
-       </div>
+    </div>
+    <!-- FIND DOCTORS -->
 
-       <!-- WORKING HOURS -->
+    <div id="doctors" class="find-doctor">
+        <h2 class="find">Find Doctors</h2>
+        <!-- Slider main container -->
+        <div class="swiper">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+                
+                <% doctors.forEach((doctor) => { %>
+                <!-- Slides -->
+                <div class="swiper-slide">
+                    <center><div class="card">
+                        <img src="https://source.unsplash.com/random/900×700/?doctor" alt="" srcset="">
+                        <div class="card-content">
+                            <!-- <h3></h3>
+                            <h3></h3>
+                            <p>Lorem ipsum dolor sit amet,consectetur</p>
+                            <a href="" class="btn">Read More</a> -->
+                            Meet Dr.<%= doctor.doctorname %> , who is <%= doctor.department %>. With a wealth of experience spanning <%= doctor.exp %> years, Dr. is dedicated to delivering top-notch medical care. Dr.  combines skillful precision with a patient-centered approach.  Dr. is committed to ensuring the well-being of each patient, backed by a passion for continuous learning and staying abreast of the latest advancements in the field."
+                        </div>
+                    </div></center>
+                    </div>
+                    
+                                <% }) %>
+            </div>
+            <!-- If we need pagination -->
+            <div class="swiper-pagination"></div>
 
-       <section class="work">
+            <!-- If we need navigation buttons -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+
+            <!-- If we need scrollbar -->
+            <div class="swiper-scrollbar"></div>
+        </div>
+    </div>
+
+    </div>
+
+    </div>
+    <!-- WORKING HOURS -->
+
+    <section class="work">
         <div class="container-fluid text-center">
             <div class="row">
-               <div class="col-md-4">
-                <div class="hours">
-                    <h2>Working Hours</h2>
-                    <div class="time">
-                        <div class="booking">Mon - Wed</div>
-                        <div class="booking">8AM - 7PM</div>
-                        <div class="booking">
-                            <button type="button" class="btn-white">
-                                <i class="fas fa-calendar-week"> </i>Book
-                            </button>
+                <div class="col-md-4">
+                    <div class="hours">
+                        <h2>Working Hours</h2>
+                        <div class="time">
+                            <div class="booking">Mon - Wed</div>
+                            <div class="booking">8AM - 7PM</div>
+                            <div class="booking">
+                                <button type="button" class="btn-white">
+                                    <i class="fas fa-calendar-week"> </i>Book
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="time">
-                        <div class="booking">Thursday</div>
-                        <div class="booking">8AM - 7PM</div>
-                        <div class="booking">
-                            <button type="button" class="btn-white">
-                                <i class="fas fa-calendar-week"></i>Book
-                            </button>
+                        <div class="time">
+                            <div class="booking">Thursday</div>
+                            <div class="booking">8AM - 7PM</div>
+                            <div class="booking">
+                                <button type="button" class="btn-white">
+                                    <i class="fas fa-calendar-week"></i>Book
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="time">
-                        <div class="booking">Friday</div>
-                        <div class="booking">8AM - 7PM</div>
-                        <div class="booking">
-                            <button type="button" class="btn-white">
-                                <i class="fas fa-calendar-week"></i>Book
-                            </button>
+                        <div class="time">
+                            <div class="booking">Friday</div>
+                            <div class="booking">8AM - 7PM</div>
+                            <div class="booking">
+                                <button type="button" class="btn-white">
+                                    <i class="fas fa-calendar-week"></i>Book
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="time">
-                        <div class="booking">Sat - Sunday</div>
-                        <div class="booking">8AM - 7PM</div>
-                        <div class="booking">
-                            <button type="button" class="btn-white">
-                                <i class="fas fa-calendar-week"></i>Book
-                            </button>
+                        <div class="time">
+                            <div class="booking">Sat - Sunday</div>
+                            <div class="booking">8AM - 7PM</div>
+                            <div class="booking">
+                                <button type="button" class="btn-white">
+                                    <i class="fas fa-calendar-week"></i>Book
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="time">
-                        <h4>Time not Flexible?</h4>
-                        <p></p>
-                        <button type="button" class="btn-green btn-transparent mt-20px">
-                            <i class="fas fa-calendar-week"></i>Suggest Checkup Time
-                        </button>
-        
-                    </div>
-                </div>
-                
-               </div>
+                        <div class="time">
+                            <h4>Time not Flexible?</h4>
+                            <p></p>
+                            <button type="button" class="btn-green btn-transparent mt-20px">
+                                <i class="fas fa-calendar-week"></i>Suggest Checkup Time
+                            </button>
 
-               
-    <script src="https://kit.fontawesome.com/6f77f484da.js" crossorigin="anonymous"></script> 
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- BOOK      -->
+
+                <div class="container-appointment" id="book">
+                    <form action="/admin/submit-appointment" method="POST" id="appointment-form">
+                        <h1>Book an Appointment</h1>
+                        <div class="alert-container">
+                            <div class="book-alert">
+                                <p>
+                                    <%= messages.success %>
+                                </p>
+                            </div>
+                        </div>
+                        <label for="patientName">Your Name</label>
+                        <input type="text" name="patientName" required>
+
+                        <label for="doctorname">Doctor Name</label>
+                        <input type="text" name="doctorname" required>
+
+
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" name="phone" required>
+
+                        <label for="date">Preferred Date</label>
+                        <input type="date" name="date" required>
+
+                        <label for="time">Preferred Time</label>
+                        <input type="time" name="time" required>
+
+                        <label for="message">Additional Information</label>
+                        <textarea id="message" name="message" rows="4"></textarea>
+
+                        <button type="submit">Submit Appointment</button>
+                    </form>
+                </div>
+                <%- include('common/alert-timer.ejs') %>
+                    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                    <script src="https://kit.fontawesome.com/6f77f484da.js" crossorigin="anonymous"></script>
+                    <script src="/javascripts/swiper.js"></script>
+                   
 </body>
+
 </html>

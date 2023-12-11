@@ -6,7 +6,7 @@
   
     <%-include('common/sidebar.ejs')-%>
   <div id="content">
-    <h1>Admin</h1>
+    <%-include('common/welcome.js')  %>
 
     <button class="btn" id="appo">
       <a href="/admin/appointment" >
@@ -20,23 +20,51 @@
     </button>
         <!-- Doctor Form Content -->
         <form id="appo-form" class="form2 active-active">
-          <div class="search-container">
-            <input type="text" id="search" placeholder="Search" />
+        
+          <div class="alert-container">
+            
+            <% if (flashMessage.success) { %>
+              <div class="alert alert-success alert-dismissal ">
+                <strong><%= flashMessage.success[0] %></strong>
+              </div>
+            <% } %>
+    
+            <% if (flashMessage.danger) { %>
+              <div class="alert alert-danger">
+                <strong><%= flashMessage.error[0] %></strong>
+              </div>
+            <% } %>
           </div>
-          <table>
+          <table class="table-admin">
             <thead>
-              <tr>
-                <th>ID</th>
-                <th>Patient Name</th>
-                <th>Doctor</th> 
-                <th>Date</th>
-                <th>Time</th>
-                <th>Action</th>
-              </tr>
+                <tr>
+                  <th>Appointment ID</th>
+                  <th>Patient Name</th>
+                  <th>Doctor Name</th>
+                  <th>Phone Number</th>
+                  <th>Preferred Date</th>
+                  <th>Preferred Time</th>
+                  <th>Additional Information</th>
+                  <th>Actions</th>
+                </tr>
             </thead>
             <tbody>
-              
+              <% appointments.forEach((row,index) => { %>
+                <tr>
+                  <td><%= index+1 %></td>
+                  <td><%= row.patientName %></td>
+                  <td><%= row.doctorname %></td>
+                  <td><%= row.phone %></td>
+                  <td><%= row.date %></td>
+                  <td><%= row.time %></td>
+                  <td><%= row.message %></td>
+                  <td><center><button class="btn-list" ><a href="/admin/appointment/edit/<%= row._id %>">Edit</a></button>
+                    <button class="btn-list" ><a href="/admin/appointment/delete/<%= row._id %>">Delete</a></button></td>
+                  </center></tr>
+              <% }) %>
             </tbody>
           </table>
         </form>
+        <%- include('common/alert-timer.ejs') %>
+<%- include('common/footer.ejs') %>
 

@@ -15,25 +15,44 @@ router.post("/admin/add-doctor", async(req, res) => {
         department: req.body.dept,
         dob: req.body.dob,
         email: req.body.email,
+        exp: req.body.exp,
         gender: req.body.gender,
         address: req.body.address,
       })
+      req.flash('success', 'Added successfully');
       res.redirect('/admin/doctor');
   } catch (error) {
     console.log(error);
-    res.status(500).send("Internal Server Error");
+     req.flash('danger', `Error:${error}`);
   }
 });
 
 router.get("/admin/doctor", async (req, res) => {
   try {
     const doctors = await doctorModel.find().exec();
-    res.render('../views/frontend/doctor-list.ejs', { doctors: doctors });
+    const flashMessage = req.flash();
+    res.render('../views/frontend/doctor-list.ejs', {  doctors, flashMessage });
+    
   } catch (error) {
     console.log(error);
-    res.status(500).send("Internal Server Error");
+     req.flash('danger', `Error:${error}`);
   }
 });
+
+
+router.get("/new", async (req, res) => {
+  try {
+    // console.log("Before fetching doctors data");
+    const doctors = await doctorModel.find().exec();
+    // console.log("Doctors data:", doctors);
+    res.render('../views/frontend/new.ejs', { doctors:doctors });
+  } catch (error) {
+    console.log(error);
+    req.flash('danger', `Error: ${error}`);
+    res.redirect('/admin/doctor'); // Redirect to handle errors
+  }
+});
+
 
 //edit
 router.get('/admin/doctor/edit/:id',async (req, res) => {
@@ -48,7 +67,7 @@ router.get('/admin/doctor/edit/:id',async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-    res.status(500).send(`Internal Server Error: ${error.message}`);
+    req.flash('danger', `Error:${error}`);
   }
 })
 
@@ -62,6 +81,7 @@ router.post('/admin/doctor/edit/:id', async (req, res) => {
       dob: req.body.dob,
       phoneNo: req.body.Mobile,
       email: req.body.email,
+      exp: req.body.exp,
       gender: req.body.gender,
       address: req.body.address,
     });
@@ -69,7 +89,7 @@ router.post('/admin/doctor/edit/:id', async (req, res) => {
     if (!doctor) {
       return res.redirect('/admin/doctor')
     }
-
+    req.flash('success', 'Updated successfully');
     // req.session.message = {
     //   message: 'Updated successfully',
     // };
@@ -77,7 +97,7 @@ router.post('/admin/doctor/edit/:id', async (req, res) => {
     res.redirect('/admin/doctor');
   } catch (error) {
     console.error(error);
-    res.status(500).send(`Internal Server Error:${error}`);
+    req.flash('danger', `Error:${error}`);
   }
 });
 
@@ -89,12 +109,14 @@ router.get('/admin/doctor/delete/:id', async (req, res) => {
     if (!doctor) {
       res.redirect('/admin/doctor')
     }
+    req.flash('success', 'Deleted successfully');
     res.redirect('/admin/doctor')
   } catch (error) {
     console.error(error);
-    res.status(500).send(`Internal Server Error:${error}`);
+    req.flash('danger', `Error:${error}`);
   }
 })
+
 
 
 module.exports = router;

@@ -5,7 +5,7 @@
     <div id="container">
         <%- include('common/sidebar.ejs') -%>
         <div id="content">
-            <h1>Admin</h1>
+          <%-include('common/welcome.js')  %>
 
             
             <button class="btn" id="dept">
@@ -26,11 +26,22 @@
             </button>
         
                     <!-- <div id="dept-form" class="form active-active"> -->
-                      <div class="search-container">
-                        <input type="text" id="search" placeholder="Search" />
+                      <div class="alert-container">
+                        <% if (flashMessage.success) { %>
+                          <div class="alert alert-success alert-dismissal ">
+                            <strong><%= flashMessage.success[0] %></strong>
+                          </div>
+                        <% } %>
+                
+                        <% if (flashMessage.danger) { %>
+                          <div class="alert alert-danger">
+                            <strong><%= flashMessage.error[0] %></strong>
+                          </div>
+                        <% } %>
                       </div>
-                      <form >
-                      <table>
+                      <form id="dept-form" class="form2 active-active">
+                      <table class="table-admin">
+                        <thead> 
                           <tr>
                             <th>Department ID</th>
                             <th>Department Name</th>
@@ -38,6 +49,8 @@
                             <th>Description</th>
                             <th>Actions</th>
                           </tr>
+                        </thead>
+
                        <tbody>
                         <% dept.forEach((row,index) => { %>
                             <tr>
@@ -45,9 +58,9 @@
                               <td><%= row.deptname %></td>
                               <td><%= row.hod %></td>
                               <td><%= row.description %></td>
-                              <td><button class="btn-list" ><a href="/admin/dept/edit/<%= row._id %>">Edit</a></button>
+                              <td><center><button class="btn-list" ><a href="/admin/dept/edit/<%= row._id %>">Edit</a></button>
                                 <button class="btn-list" ><a href="/admin/dept/delete/<%= row._id %>">Delete</a></button></td>
-                             </tr>
+                              </center></tr>
                             </tr>
                         <% }) %>
                        </tbody>
@@ -57,4 +70,5 @@
                     
                   <!-- </div> -->
     </div>
-    <%- include('common/footer.ejs') -%>
+    <%- include('common/alert-timer.ejs') %>
+    <%- include('common/footer.ejs') %>

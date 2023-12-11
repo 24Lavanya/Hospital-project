@@ -22,6 +22,10 @@ const doctorSchema = mongoose.Schema({
         // required: true,
         // unique: true,
     },
+    exp: {
+        type: Number,
+        // required: true, 
+    },
     gender: {
         type: String,
         // required: true, 

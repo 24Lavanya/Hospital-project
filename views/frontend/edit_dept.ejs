@@ -6,7 +6,7 @@
   
     <%-include('common/sidebar.ejs')-%>
   <div id="content">
-    <h1>Admin</h1>
+    <%-include('common/welcome.js')  %>
     
     
           <form id="addDepartmentForm" action="/admin/dept/edit/<%= depts._id %>" method="post">

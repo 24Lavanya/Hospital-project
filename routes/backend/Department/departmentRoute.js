@@ -14,20 +14,22 @@ router.post("/admin/add-dept", async (req, res) => {
       hod: req.body.head_of_department,
       description: req.body.description,
     });
+    req.flash('success', 'Added successfully');
       res.redirect('/admin/dept')
   } catch (error) {
     console.log(error);
-    res.status(500).send("Internal Server Error");
+    req.flash('danger', `Error:${error}`);
   }
 });
 
 router.get("/admin/dept", async(req, res) => {
    try {
-       const dept = await deptModel.find().exec();
-       res.render('../views/frontend/department-list.ejs',{dept:dept})
+     const dept = await deptModel.find().exec();
+     const flashMessage = req.flash();
+       res.render('../views/frontend/department-list.ejs',{dept:dept,flashMessage})
    } catch (error) {
     console.log(error);
-    res.status(500).send("Internal Server Error");
+    req.flash('danger', `Error:${error}`);
    }
 });
   
@@ -44,7 +46,7 @@ router.get('/admin/dept/edit/:id',async (req, res) => {
     })
   } catch (error) {
     console.error(error);
-    res.status(500).send(`Internal Server Error:${error}`);
+    req.flash('danger', `Error:${error}`);
   }
 })
 
@@ -59,10 +61,11 @@ router.post('/admin/dept/edit/:id', async (req, res) => {
     if (!depts) {
       res.redirect('/admin/dept')
     }
+    req.flash('success', 'Updated successfully');
     res.redirect('/admin/dept')
   } catch (error) {
     console.error(error);
-    res.status(500).send(`Internal Server Error:${error}`);
+    req.flash('danger', `Error:${error}`);
   }
 })
 
@@ -75,10 +78,11 @@ router.get('/admin/dept/delete/:id', async (req, res) => {
     if (!depts) {
      return res.redirect('/admin/dept')
     }
+    req.flash('success', 'Deleted successfully');
     res.redirect('/admin/dept')
   } catch (error) {
     console.error(error);
-    res.status(500).send(`Internal Server Error:${error}`);
+    req.flash('danger', `Error:${error}`);
   }
 })
 module.exports = router;

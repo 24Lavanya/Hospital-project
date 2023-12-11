@@ -2,8 +2,7 @@ const express = require("express");
 const router = express();
 // const appoModel = require("./Models/appointment-model");
 
-router.get("/admin/appointment", (req, res) => {
-//   res.send('hi')
+router.get("/", (req, res) => {
   res.render("../views/frontend/appointment-list.ejs");
 });
 

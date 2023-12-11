@@ -16,21 +16,23 @@
     /* border: 2px solid red; */
   }
   #content {
-    display: flex;
-    flex-direction: column;
-    background-color: #0000006b;
+    flex-grow:1 ;
   }
-  .right{
-    display: flex;
-    align-items: center;
-    /* border:2px solid red; */
-  }
+  
   .welcome{
+    /* border:2px solid white; */
     background-color: #333;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
   }
-  #content h1 {
+  .welcome-child{
+    width: 100%;
+    /* border:2px solid white; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .welcome h1 {
     color: #fff;
     padding: 12px;
   }
@@ -62,7 +64,7 @@
     border: 1px solid #fff;
   }
   #sidebar {
-    width: 200px;
+    max-width: 15%;
     background-color: #333;
     color: white;
     padding: 20px;
@@ -73,7 +75,7 @@
   #sidebar button {
     background-color: aliceblue;
     padding: 12px;
-    width: 100px;
+    width: 122px;
     margin: 12px;
   }
   .btn {
@@ -82,7 +84,6 @@
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
-    /* margin: 5px; */
     border: none;
     margin: 12px 10px;
     font-size: 16px;
@@ -93,10 +94,10 @@
     background-color: #2980b9;
     color: #fff;
   }
-
+  
   
   #dashboard-form  {
-    /* height: 100vh; */
+    height: 100vh;
     overflow: hidden;
   }
   
@@ -112,13 +113,22 @@
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 5px;
-  
-    /* margin: 30px;
-      padding: 20px;
-      border: 1px solid #ccc;
-      background-color:skyblue; */
   }
-  
+  .btn-list{
+    border:none;
+    padding: 8px;
+    border-radius: 4px;
+  }
+  .btn-list:first-child{
+    background-color:#27ae60;
+  }
+  .btn-list:last-child{
+    background-color:rgb(211, 66, 66);
+  }
+  .btn-list a{
+    text-decoration: none;
+    color: white;
+  }
   .form,
   .form2,
   .form3 {
@@ -131,10 +141,7 @@
   .active-active {
     display: block;
   }
-  
-  .search-container {
-    margin-bottom: 20px;
-  }
+ 
   
   input[type="text"] {
     padding: 5px;
@@ -145,7 +152,7 @@
     background-color: #4caf50;
     color: #fff;
     padding: 10px 15px;
-    max-width: 20%;
+    max-width: fit-content;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -163,23 +170,18 @@
     background-color: #27ae60;
   }
   
-  .search-container {
-    margin-bottom: 20px;
-    border-color: orange;
-  }
   
-  #search {
-    padding: 10px;
-    width: 100%;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+  .dataTables_length{
+    padding: 12px;
   }
-  
+  .row{
+    padding: 12px;
+  }
   table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
+    margin-top: 5px;
+    text-align: center;
   }
   
   table,
@@ -187,13 +189,19 @@
   td {
     border: 2px solid #333;
   }
-  
+  .alert-container{
+    height: 10vh;
+    padding: 8px;
+    /* border:2px solid red; */
+  }
+  #list-show td:last-child{
+    width:150px;
+  }
   th,
   td {
     padding: 12px;
     text-align: left;
   }
-  
   th {
     background-color: #333;
     color: white;
@@ -229,6 +237,8 @@
     border: 1px solid #ccc;
     border-radius: 4px;
   }
+  
+ 
   
   select {
     appearance: none;

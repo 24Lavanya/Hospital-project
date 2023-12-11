@@ -5,20 +5,31 @@
   <div id="container">
     <%- include('common/sidebar.ejs') %>
     <div id="content">
-      <h1>Admin</h1>
-
+      <%-include('common/welcome.js')  %>
       <button class="btn" id="pat">
         <a href="/admin/patient" class="routes">Patient</a>
       </button>
       <button class="btn" id="add-pat">
         <a href="/admin/add-patient" class="routes">Add patient</a>
       </button>
-
+      
       <form id="pat-form" class="form3 active-active">
-        <div class="search-container">
-          <input type="text" id="search" placeholder="Search" />
+        <div class="alert-container">
+
+          <% if (flashMessage.success) { %>
+            <div class="alert alert-success alert-dismissal ">
+              <strong><%= flashMessage.success[0] %></strong>
+            </div>
+          <% } %>
+  
+          <% if (flashMessage.danger) { %>
+            <div class="alert alert-danger">
+              <strong><%= flashMessage.error[0] %></strong>
+            </div>
+          <% } %>
         </div>
-        <table>
+
+        <table class="table-admin">
           <thead>
             <tr>
               <th>Patient ID</th>
@@ -44,14 +55,14 @@
               <td><%= row.email  %></td>
               <td><%= row.gender  %></td>
               <td><%= row.address  %></td>
-              <td><button class="btn-list"><a href="/admin/patient/edit/<%= row._id %>">Edit</a></button>
+              <td><center><button class="btn-list"><a href="/admin/patient/edit/<%= row._id %>">Edit</a></button>
               <button class="btn-list"><a href="/admin/patient/delete/<%= row._id %>">Delete</a></button>
-            </tr>
+            </center></tr>
            <% }) %>
           </tbody>
         </table>
       </form>
     </div>
   </div>
-</body>
-</html>
+<%- include('common/alert-timer.ejs') %>
+<%- include('common/footer.ejs') %>
