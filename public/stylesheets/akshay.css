@@ -1,94 +1,99 @@
-body{
-    background-color: skyblue;
-  }
+.slideshow-container {
+  max-width: 700px;
+  position: relative;
+  margin: 50px auto;
   
-  * {box-sizing:border-box}
+}
+
+
+.mySlides {
+  display: none;
+  position: relative;
+  /* border: 2px solid red; */
+
+}
+.mySlides img {
+  width: 100%;
+  height: 50vh; 
+  object-fit: cover;
+}
+
+
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 35%;
+  width: 50px;
+  margin-top: -22px;
+  color: black;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+
+.next {
+  right: -80px;
+  border-radius: 3px 0 0 3px;
   
+
+}
+.prev{
+  left:-80px;
+  border-radius: 3px 0 0 3px;
   
-  .slideshow-container {
-    max-width: 1000px;
-    position: relative;
-    margin: auto;
-    overflow: hidden;
-  }
-  
-  
-  .mySlides {
-    display: none;
-    position: relative;
-  }
-  
-  
-  .prev, .next {
-    cursor: pointer;
-    position: absolute;
-    top: 50%;
-    width: 50px;
-    margin-top: -22px;
-    padding: 16px;
-    color: white;
-    font-weight: bold;
-    font-size: 18px;
-    transition: 0.6s ease;
-    border-radius: 0 3px 3px 0;
-    user-select: none;
-  }
-  
-  
-  .next {
-    right: 0;
-    border-radius: 3px 0 0 3px;
-    
-  
-  }
-  .prev{
-    left:0;
-    border-radius: 3px 0 0 3px;
-    
-  
-  }
-  
-  
-  .prev:hover, .next:hover {
-    background-color: rgba(0,0,0,0.8);
-  }
-  .additional-box {
-    background-color: black;
-    border: 4px solid blueviolet;
-    border-radius: 8px;
-    padding: 20px;
-    margin-top: 20px;
-    transition: transform 0.3s ease-in-out;
-  }
-  
-  
-  .additional-box p {
-    font-size: 18px;
-    line-height: 1.6;
-    color: white;
-    margin: 0; 
-  }
-  
-  
-  .text {
-    color: #fff; 
-    font-size: 24px; 
-    font-weight: bold; 
-    padding: 10px; 
-    background-color: rgba(0, 0, 0, 0.5); 
-    position: absolute; 
-    top:0;
-    width: 100%; 
-    text-align: center; 
-  }
-  
-  
-  .fade {
-    animation-name: fade;
-    animation-duration: 1.5s;
-  }
-  
-  @keyframes fade {
-    from {opacity: .4}
-    to {opacity: 1}
-  }
+
+}
+
+
+/* .prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+} */
+#service-head{
+  margin: 8px 45px;
+}
+.additional-box {
+  border: 4px solid skyblue; 
+  width:700px;
+  padding: 25px; 
+  height: 30vh;
+  margin: 10px 0; 
+  border-radius: 10px; 
+  background-color:transparent; 
+  box-shadow: 0 0 15px #96d2fa; 
+
+}
+
+
+.additional-box p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: black;
+  margin: 0; 
+}
+
+
+.text {
+  color: #fff; 
+  font-size: 24px; 
+  font-weight: bold; 
+  padding: 10px; 
+  background-color: rgba(0, 0, 0, 0.5); 
+  position: absolute; 
+  top:0;
+  width: 100%; 
+  text-align: center; 
+}
+
+
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}

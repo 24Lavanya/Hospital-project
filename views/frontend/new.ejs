@@ -4,12 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Hospital management</title>
     <link rel="stylesheet" href="/stylesheets/new.css">
     <link rel="stylesheet" href="/stylesheets/book.css">
+    <link rel="stylesheet" href="/stylesheets/akshay.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;1,200;1,300&display=swap"
         rel="stylesheet">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.79.0/dist/L.Control.Locate.min.css" />
     <script src="index.js"></script>
 </head>
 
@@ -21,9 +25,9 @@
         <div class="middle">
             <ul>
                 <li><a href="">Home</a></li>
-                <li><a href="">Services</a></li>
-                <li><a href="">Doctors</a></li>
                 <li><a href="">Expertise</a></li>
+                <li><a href="#service-head">Services</a></li>
+                <li><a href="#find">Doctors</a></li>
             </ul>
         </div>
         <div class="right">
@@ -44,7 +48,7 @@
         </video>
     </section>
     <div class="service">
-        <a href="#services-provided">
+        <a href="#services">
             <div class="service-content">
                 Our Service Providers
                 <div class="service-icon">
@@ -79,28 +83,41 @@
     <!-- FIND DOCTORS -->
 
     <div id="doctors" class="find-doctor">
-        <h2 class="find">Find Doctors</h2>
+        <h2 class="find">Our Top Doctors</h2>
         <!-- Slider main container -->
         <div class="swiper">
             <!-- Additional required wrapper -->
             <div class="swiper-wrapper">
-                
-                <% doctors.forEach((doctor) => { %>
-                <!-- Slides -->
-                <div class="swiper-slide">
-                    <center><div class="card">
-                        <img src="https://source.unsplash.com/random/900×700/?doctor" alt="" srcset="">
-                        <div class="card-content">
-                            <!-- <h3></h3>
+
+                <% doctors.forEach((doctor)=> { %>
+                    <!-- Slides -->
+                    <div class="swiper-slide">
+                        <center>
+                            <div class="card">
+                                <% if (doctor.gender==='male') { %>
+                                    <img src="https://images.unsplash.com/photo-1612276529731-4b21494e6d71?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" srcset="">
+                                    <!-- <p>The condition is true.</p> -->
+                                <% } else if (doctor.gender==='female') { %>
+                                    <img src="https://img.freepik.com/free-photo/portrait-doctor_144627-39391.jpg?t=st=1702397262~exp=1702397862~hmac=19c51c894d2243868e652290ae1584d420fd51370ca7255e70728e4bd894adfd" alt="" srcset="">
+                                    <!-- <p>The condition is false.</p> -->
+                                <% } %>
+                                <div class="card-content">
+                                    <!-- <h3></h3>
                             <h3></h3>
                             <p>Lorem ipsum dolor sit amet,consectetur</p>
                             <a href="" class="btn">Read More</a> -->
-                            Meet Dr.<%= doctor.doctorname %> , who is <%= doctor.department %>. With a wealth of experience spanning <%= doctor.exp %> years, Dr. is dedicated to delivering top-notch medical care. Dr.  combines skillful precision with a patient-centered approach.  Dr. is committed to ensuring the well-being of each patient, backed by a passion for continuous learning and staying abreast of the latest advancements in the field."
-                        </div>
-                    </div></center>
+                                    Meet Dr.<%= doctor.doctorname %> , who is <%= doctor.department %>. With a wealth of
+                                            experience spanning <%= doctor.exp %> years, Dr. is dedicated to delivering
+                                                top-notch medical care. Dr. combines skillful precision with a
+                                                patient-centered approach. Dr. is committed to ensuring the well-being
+                                                of each patient, backed by a passion for continuous learning and staying
+                                                abreast of the latest advancements in the field."
+                                </div>
+                            </div>
+                        </center>
                     </div>
-                    
-                                <% }) %>
+
+                    <% }) %>
             </div>
             <!-- If we need pagination -->
             <div class="swiper-pagination"></div>
@@ -173,46 +190,154 @@
 
                 </div>
 
-                <!-- BOOK      -->
+                <!-- Services -->
+               
 
-                <div class="container-appointment" id="book">
-                    <form action="/admin/submit-appointment" method="POST" id="appointment-form">
-                        <h1>Book an Appointment</h1>
-                        <div class="alert-container">
-                            <div class="book-alert">
-                                <p>
-                                    <%= messages.success %>
-                                </p>
+                <h2 id="service-head">Our Services</h2>
+                    <div class="slideshow-container" id="services">
+
+                        <div class="mySlides fade">
+                            <div class="text">Cardiac Surgeries</div>
+                            <img src="https://images.unsplash.com/photo-1551601651-2a8555f1a136?q=80&w=1447&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" style="width:100%">
+                            <div class="content-box" id="content-box-1"> </div>
+                            <div class="additional-box" id="additional-box-1">
+                                <p>Cardiac surgeries are intricate procedures addressing heart conditions. Coronary
+                                    Artery Bypass Grafting (CABG) involves rerouting blood around blocked arteries,
+                                    while valve replacement corrects faulty heart valves. Angioplasty employs a balloon
+                                    to open narrowed arteries, often accompanied by stent placement to maintain blood
+                                    flow.These surgeries aim to enhance cardiac health and treat cardiovascular
+                                    disorders.</p>
                             </div>
                         </div>
-                        <label for="patientName">Your Name</label>
-                        <input type="text" name="patientName" required>
-
-                        <label for="doctorname">Doctor Name</label>
-                        <input type="text" name="doctorname" required>
 
 
-                        <label for="phone">Phone Number</label>
-                        <input type="tel" name="phone" required>
 
-                        <label for="date">Preferred Date</label>
-                        <input type="date" name="date" required>
 
-                        <label for="time">Preferred Time</label>
-                        <input type="time" name="time" required>
+                        <div class="mySlides fade">
+                            <div class="text">Orthopedic Surgeries</div>
+                            <img src="https://images.unsplash.com/photo-1597764690472-ec054f1c8637?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" style="width:100%">
+                            <div class="content-box" id="content-box-1"></div>
+                            <div class="additional-box" id="additional-box-1">
+                                <p>Orthopedic surgeries involve the diagnosis and treatment of musculoskeletal
+                                    conditions, including bones, joints, ligaments, muscles, and tendons. These
+                                    procedures address issues such as fractures, joint disorders, arthritis, and
+                                    deformities,these procedures aim to improve the function and structure of the
+                                    musculoskeletal system for enhanced mobility and overall well-being. </p>
+                            </div>
 
-                        <label for="message">Additional Information</label>
-                        <textarea id="message" name="message" rows="4"></textarea>
+                        </div>
 
-                        <button type="submit">Submit Appointment</button>
-                    </form>
+                        <div class="mySlides fade">
+
+                            <div class="text">Neurosurgery</div>
+                            <img src="https://img.freepik.com/free-photo/researcher-looking-monitor-analysing-brain-scan-while-coworker-discussing-with-patient-background-about-side-effects-mind-functions-nervous-system-tomography-scan-working-laboratory_482257-13071.jpg?w=826&t=st=1702396047~exp=1702396647~hmac=e58c54ff1009c5b8ed6b19414fc7a0c2be3f8f0c2d6b39dfe241ddd9e4dff8b8" style="width:100%">
+                            <div class="content-box" id="content-box-1"></div>
+                            <div class="additional-box" id="additional-box-1">
+                                <p>Neurosurgery involves surgical interventions on the nervous system, including the
+                                    brain and spinal cord, to treat conditions like tumors, trauma, or neurological
+                                    disorders for improved patient health by precise and specialized procedures that
+                                    treat disorders affecting the delicate structures of the nervous system. </p>
+                            </div>
+                        </div>
+
+                        <div class="mySlides fade">
+
+                            <div class="text">Gastrointestinal Surgery</div>
+                            <img src="https://img.freepik.com/free-photo/high-angle-doctor-explaining-anatomy_23-2149389044.jpg?w=996&t=st=1702396114~exp=1702396714~hmac=061f659f28e6efe233550922883ae2e676ed649313820d836cd67a7155bfa674" style="width:100%">
+                            <div class="content-box" id="content-box-1"></div>
+                            <div class="additional-box" id="additional-box-1">
+                                <p>Gastrointestinal surgery focuses on the digestive system, treating conditions like
+                                    hernias, colorectal disorders, and stomach issues through surgical procedures for
+                                    improved gastrointestinal health,providing effective solutions for disorders
+                                    affecting the organs involved in digestion, absorption, and nutrient processing
+                                    within the digestive tract.</p>
+                            </div>
+                        </div>
+
+                        <div class="mySlides fade">
+
+                            <div class="text">Ophthalmic Surgery</div>
+                            <img src="https://img.freepik.com/free-photo/man-using-eye-drops-close-up_23-2148696714.jpg?size=626&ext=jpg&ga=GA1.1.398470763.1688918012&semt=sph" style="width:100%">
+                            <div class="content-box" id="content-box-1"> </div>
+                            <div class="additional-box" id="additional-box-1">
+                                <p> Ophthalmic surgery focuses on procedures related to the eyes, treating conditions
+                                    such as cataracts, glaucoma, and refractive errors. Surgeons aim to improve vision
+                                    and address eye-related disorders through interventions like lens replacement and
+                                    laser surgeries, enhancing the overall health and functionality of the eyes.</p>
+                            </div>
+                        </div>
+
+                        <div class="mySlides fade">
+
+                            <div class="text">Dental Surgery</div>
+                            <img src="https://img.freepik.com/free-photo/little-beautiful-girl-dentist-smiling_158595-7736.jpg?size=626&ext=jpg&ga=GA1.1.398470763.1688918012&semt=sph" style="width:100%">
+                            <div class="content-box" id="content-box-1"></div>
+                            <div class="additional-box" id="additional-box-1">
+                                <p>Involves procedures related to the teeth and oral cavity.Tooth extraction, root
+                                    canal, and dental implants are common dental surgeries.These surgeries aim to
+                                    restore oral health, alleviate pain, and enhance the functionality and aesthetics of
+                                    the teeth and surrounding structures.</p>
+                            </div>
+                        </div>
+
+
+                        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                    </div>
+                    <br>
+
+
+                    <!-- BOOK      -->
+                    <div class="appointment-container-main">
+                    <div class="container-appointment" id="book">
+                        <form action="/admin/submit-appointment" method="POST" id="appointment-form">
+                            <h1>Book an Appointment</h1>
+                            <div class="alert-container">
+                                <div class="book-alert">
+                                    <p>
+                                        <%= messages.success %>
+                                    </p>
+                                </div>
+                            </div>
+                            <label for="patientName">Your Name</label>
+                            <input type="text" name="patientName" required>
+
+                            <label for="doctorname">Doctor Name</label>
+                            <input type="text" name="doctorname" required>
+
+
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" name="phone" required>
+
+                            <label for="date">Preferred Date</label>
+                            <input type="date" name="date" required>
+
+                            <label for="time">Preferred Time</label>
+                            <input type="time" name="time" required>
+
+                            <label for="message">Additional Information</label>
+                            <textarea id="message" name="message" rows="4"></textarea>
+
+                            <button type="submit">Submit Appointment</button>
+                        </form>
+                    </div>
                 </div>
-                <%- include('common/alert-timer.ejs') %>
-                    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-                    <script src="https://kit.fontawesome.com/6f77f484da.js" crossorigin="anonymous"></script>
-                    <script src="/javascripts/swiper.js"></script>
-                   
-</body>
 
-</html>
+                <!-- MAP -->
+
+                <div id="map"></div>
+
+
+                <%- include('common/alert-timer.ejs') %>
+                <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+                integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+                crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.79.0/dist/L.Control.Locate.min.js" charset="utf-8"></script>
+                <script src="https://kit.fontawesome.com/6f77f484da.js" crossorigin="anonymous"></script>
+                <script src="/javascripts/map.js"></script>
+                        <script src="/javascripts/swiper.js"></script>
+<script src="/javascripts/akshay.js"></script>
+                </body>
+
+                </html>
