@@ -12,7 +12,9 @@ const passport = require('passport');
 const { request } = require('https');
 const flash = require('connect-flash');
 const flashe = require('express-flash');
-const doctorModel=require('./Models/doctor-model')
+const doctorModel = require('./Models/doctor-model');
+
+const port = process.env.PORT || 3000;
 mongoose
   .connect(
     process.env.MONGODB_URL
@@ -129,6 +131,6 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.listen(process.env.PORT, console.log("Listening"));
+app.listen(port, console.log("Listening"));
 
 module.exports = app;
