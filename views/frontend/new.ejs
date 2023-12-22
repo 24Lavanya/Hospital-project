@@ -12,41 +12,58 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;1,200;1,300&display=swap"
         rel="stylesheet">
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.79.0/dist/L.Control.Locate.min.css" />
     <script src="index.js"></script>
 </head>
 
 <body>
     <div class="navbar">
-        <div class="logo">
-            <img src="/images/Logoremovedbackground.png" alt="logo">
-        </div>
-        <div class="middle">
+        <div class="logo"><img src="/images/Logoremovedbackground.png" alt="logo"></div>
+        <div class="nav-menu">
+            
             <ul>
-                <li><a href="">Home</a></li>
-                <li><a href="">Expertise</a></li>
-                <li><a href="#service-head">Services</a></li>
-                <li><a href="#find">Doctors</a></li>
+                
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Doctor</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Directions</a></li>
+                
+                <div class="btns">
+                    <a href="#book" class="btn-green">
+                        <i class="fas fa-calendar-week"></i>Book an appointment
+                    </a>
+                    <a href="/logout" class="btn-green">
+                        Logout
+                    </a>
+ 
+                </div>
+               
             </ul>
         </div>
-        <div class="right">
-            <a href="#book" class="btn-green mt-20px">
-                <i class="fas fa-calendar-week"></i>Book an appointment
-            </a>
-            <a href="/logout" class="btn-green mt-20px">
-                Logout
-            </a>
-        </div>
-    </div>
-    <section class="banner">
+        <input type="checkbox" id="click">
+            <label for="click" class="hamburger">
+        <button id="menu">
+            <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--><path fill="#fff" path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg>
+        </button></label>
+        <input type="checkbox" id="click">
+                <label for="click" class="cross">
+            <button id="close">
+                <svg xmlns="http://www.w3.org/2000/svg" height="16" width="12" viewBox="0 0 384 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--><path fill="#ffffff" d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>
+            </button></label>
+     
+     </div>
+
+     <section class="banner">
         <div class="banner-content">
             <h1> Our expertise at your service</h1>
         </div>
         <video autoplay loop muted>
-            <source src="/images/pexels-ron-lach-7579331 (2160p).mp4" type="video/mp4">
+            <source src="images/pexels-ron-lach-7579331 (2160p).mp4" type="video/mp4">
         </video>
     </section>
+
+
     <div class="service">
         <a href="#services">
             <div class="service-content">
@@ -94,6 +111,7 @@
                     <div class="swiper-slide">
                         <center>
                             <div class="card">
+                                <div class="card-card">
                                 <% if (doctor.gender==='male') { %>
                                     <img src="https://images.unsplash.com/photo-1612276529731-4b21494e6d71?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" srcset="">
                                     <!-- <p>The condition is true.</p> -->
@@ -113,6 +131,7 @@
                                                 of each patient, backed by a passion for continuous learning and staying
                                                 abreast of the latest advancements in the field."
                                 </div>
+                            </div>
                             </div>
                         </center>
                     </div>
@@ -134,9 +153,77 @@
     </div>
 
     </div>
+
+    <hr style="color: brown;">
+    <h2 id="service-head">Our Services</h2>
+    <div class="response-out" >
+      <div class="response">
+          <a href="javascript:void(0);">
+              <div class="response-bg" style="background-image: url('https://images.unsplash.com/photo-1512678080530-7760d81faba6?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
+              <div class="response-content">
+                  <div class="response-icon">
+                      <i class="fas fa-leaf"></i>
+                  </div>
+                  <h2>Rooms</h2>
+                  <p>Our hospital offers 300 rooms, including general, private, and suite accommodations, ensuring diverse patient needs are met. Our affordable healthcare starts at 800 per day, making quality medical care accessible to all.</p>
+                  <button type="button" class="read-more mt-20px">Read-more
+                      <i class="fas fa-arrow-right"></i>
+                  </button>
+              </div>
+          </a>
+        </div>
+
+        <div class="response">
+            <a href="javascript:void(0);">
+                <div class="response-bg" style="background-image: url('https://img.freepik.com/free-photo/interior-view-operating-room_1170-2254.jpg?w=996&t=st=1702788605~exp=1702789205~hmac=a8f13a4b7d84f25639752d4906f7b47805bd7407887b3678e42e7afa1af787fd');"></div>
+                <div class="response-content">
+                    <div class="response-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h2>Operation Theatre</h2>
+                    <p>Our hospital features a modern Operating Theater (OT) where our skilled surgeons perform a variety of procedures using the latest medical advancements.</p>
+                    <button type="button" class="read-more mt-20px">Read-more
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </a>
+          </div>
+          <div class="response">
+            <a href="javascript:void(0);">
+                <div class="response-bg" style="background-image: url('https://img.freepik.com/free-photo/nurse-checking-pulse-female-patient-s-wrist_23-2147861479.jpg?w=996&t=st=1702788568~exp=1702789168~hmac=0415052990325f31113eeb075fe590d01c0c0f683c596acd5a4eb00d28394d4d');"></div>
+                <div class="response-content">
+                    <div class="response-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h2>Caring Staff</h2>
+                    <p>Our hospital team of experienced and compassionate healthcare professionals is committed to providing the highest standard of care for our patients.</p>
+                    <button type="button" class="read-more mt-20px">Read-more
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </a>
+          </div>
+          <div class="response">
+            <a href="javascript:void(0);">
+                <div class="response-bg" style="background-image: url('https://img.freepik.com/free-photo/monitor-hospital-ward-showing-bmp-from-patient_482257-9697.jpg?t=st=1702788637~exp=1702789237~hmac=e4f53dc3b5cab6c3574693f7ea43c3e4ddf0e2e35ec31eb47a881686c37d384f');"></div>
+                <div class="response-content">
+                    <div class="response-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h2>Intensive Care Unit (ICU)</h2>
+                    <p>Our Intensive Care Unit (ICU) is equipped with cutting-edge technology to provide round-the-clock critical care for patients in need of specialized attention.</p>
+                    <button type="button" class="read-more mt-20px">Read-more
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </a>
+          </div>
+
+     </div>
+     
     <!-- WORKING HOURS -->
 
-    <section class="work">
+    <!-- <section class="work">
         <div class="container-fluid text-center">
             <div class="row">
                 <div class="col-md-4">
@@ -188,12 +275,12 @@
                         </div>
                     </div>
 
-                </div>
+                </div> -->
 
                 <!-- Services -->
                
 
-                <h2 id="service-head">Our Services</h2>
+                
                     <div class="slideshow-container" id="services">
 
                         <div class="mySlides fade">
@@ -325,6 +412,7 @@
 
                 <!-- MAP -->
 
+                <button id="directions" class="btn-green">Get directions</button>
                 <div id="map"></div>
 
 
@@ -333,11 +421,13 @@
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
                 integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
                 crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+                <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
                 <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.79.0/dist/L.Control.Locate.min.js" charset="utf-8"></script>
                 <script src="https://kit.fontawesome.com/6f77f484da.js" crossorigin="anonymous"></script>
                 <script src="/javascripts/map.js"></script>
                         <script src="/javascripts/swiper.js"></script>
-<script src="/javascripts/akshay.js"></script>
+                <script src="/javascripts/akshay.js"></script>
                 </body>
 
                 </html>

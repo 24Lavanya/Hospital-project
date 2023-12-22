@@ -1,12 +1,11 @@
 // Map initialisation
-var map = L.map("map").setView([12.8744226, 74.8525889], 20);
+var map = L.map("map").setView([12.874466014287064, 74.85516364032976], 20);
 
 //osm layer
 var osm = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution:
     '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 });
-osm.addTo(map);
 
 
 //google street tile
@@ -19,12 +18,58 @@ googleSat = L.tileLayer('https://{s}.google.com/vt?lyrs=s&x={x}&y={y}&z={z}', {
     subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
 });
 
+googleSat.addTo(map);
 
 
 //Marker
 var marker = L.marker([12.874466014287064, 74.85516364032976])
 marker.addTo(map);
+var marker2,movingMarker;
 
+var car = L.icon({
+    iconUrl: '/images/—Pngtree—classical stylish car_4180732.png',
+    iconSize:[70,70]
+})
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            function (position) {
+                marker2 = L.marker([position.coords.latitude, position.coords.longitude]);
+                marker2.addTo(map);
+                map.setView([position.coords.latitude, position.coords.longitude]);
+                L.Routing.control({
+                    waypoints: [
+                        L.latLng(position.coords.latitude,position.coords.longitude),
+                        L.latLng(12.874466014287064, 74.85516364032976)
+                    ]
+                }).on('routesfound', function (e) {
+                    console.log(e)
+                    e.routes[0].coordinates.forEach((coord, i) => {
+                        setTimeout(() => {
+                            if (movingMarker)
+                                movingMarker.removeFrom(map)
+                            movingMarker=L.marker([coord.lat, coord.lng],{icon:car}).addTo(map)
+                            
+                        },10*i)
+                            
+                        })
+                }).addTo(map);
+                if (movingMarker === L.latLng(12.874466014287064, 74.85516364032976))
+                {
+                    alert('Destination reached')
+                }
+            },
+            function (error) {
+                console.error("Error getting location:", error);
+                alert("Could not get your location");
+            }
+            );
+        } else {
+            console.error("Geolocation is not supported by this browser.");
+            alert("Geolocation is not supported by your browser.");
+        }
+    }
+   
 //Layer control
 
 var baseMaps = {
@@ -37,37 +82,33 @@ var overlayMaps = {
     "Marker": marker
 };
 
-// L.control.layers(baseMaps, overlayMaps).addTo(map);
-
-// if (navigator.geolocation) {
-    
-//     navigator.geolocation.getCurrentPosition(function (position) {
-//         console.log(position)
-//     }, function (error) {
-//         console.error("Error getting location:", error);
-//         alert("Could not get your location")
-//     })
-// }
+L.control.layers(baseMaps, overlayMaps).addTo(map);
 
 
-L.control.locate().addTo(map);
+
+document.getElementById("directions").addEventListener("click", getLocation);
+
+
+
+
+
 
 
 //Location details
-// var popup = L.popup();
-// function onMapClick(e) {
-//   //uses nominatim api that fetches placename from the lat and log
-//   fetch(
-//     `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${e.latlng.lat}&lon=${e.latlng.lng}`
-//   )
-//     .then((response) => response.json())
-//     .then((data) => {
-//       popup
-//         .setLatLng(e.latlng)
-//         .setContent(`<b>Place Name:</b> ${data.display_name}`)
-//         .openOn(map);
-//     });
-// }
+var popup = L.popup();
+function onMapClick(e) {
+  //uses nominatim api that fetches placename from the lat and log
+  fetch(
+    `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${e.latlng.lat}&lon=${e.latlng.lng}`
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      popup
+        .setLatLng(e.latlng)
+        .setContent(`<b>Place Name:</b> ${data.display_name}`)
+        .openOn(map);
+    });
+}
 
-// map.on("click", onMapClick);
+map.on("click", onMapClick);
 

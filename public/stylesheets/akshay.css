@@ -1,7 +1,7 @@
 .slideshow-container {
   max-width: 700px;
   position: relative;
-  margin: 50px auto;
+  margin: 5vh auto;
   
 }
 
@@ -52,13 +52,12 @@
   background-color: rgba(0,0,0,0.8);
 } */
 #service-head{
-  margin: 8px 45px;
+  margin: 2px 45px;
 }
 .additional-box {
-  border: 4px solid skyblue; 
-  width:700px;
+  border: 4px solid skyblue;
   padding: 25px; 
-  height: 30vh;
+  min-height: 40vh;
   margin: 10px 0; 
   border-radius: 10px; 
   background-color:transparent; 

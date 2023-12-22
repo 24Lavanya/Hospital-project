@@ -16,8 +16,8 @@ router.get('/create', function(req, res, next) {
 router.get('/log', function(req, res, next) {
   res.render('../views/frontend/login.ejs');
 });
-router.get('/profile', isLoggedIn, function(req, res, next) {
-  res.render('../views/frontend/home.ejs');
+router.get('/new', isLoggedIn, function(req, res, next) {
+  res.render('../views/frontend/new.ejs');
 });
  
 router.post("/register", function (req, res) {
@@ -26,7 +26,7 @@ router.post("/register", function (req, res) {
   userModel.register(userData, req.body.password)
     .then(function () {
       passport.authenticate("local")(req, res, function () {
-        res.redirect("/profile");
+        res.redirect("/new");
     })
   })
 })
