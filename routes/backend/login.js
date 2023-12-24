@@ -8,51 +8,64 @@ passport.use(new localStrategy(userModel.authenticate()));
 let adminroute = require('./admin');
 router.use('',adminroute)
 
-router.get('/create', function(req, res, next) {
+
+router.get('/login', function (req, res, next) {
+  res.render('../views/frontend/login.ejs',{error:req.flash("error")});
+});
+router.get('/register', function(req, res, next) {
   res.render('../views/frontend/create.ejs');
 });
-
-
-router.get('/log', function(req, res, next) {
-  res.render('../views/frontend/login.ejs');
+router.get('/profile', isLoggedIn, function(req, res, next) {
+  res.render('../views/frontend/profile.ejs');
 });
-router.get('/new', isLoggedIn, function(req, res, next) {
-  res.render('../views/frontend/new.ejs');
-});
- 
+
+router.get('/doc-ui', (req, res) => {
+  res.render('../views/frontend/doctorui.ejs')
+})
 router.post("/register", function (req, res) {
-  const { username,email } = req.body;
-  const userData = new userModel({username,email});
+  const { username,email,usedBy } = req.body;
+  const userData = new userModel({ username, email, usedBy });
   userModel.register(userData, req.body.password)
     .then(function () {
       passport.authenticate("local")(req, res, function () {
-        res.redirect("/new");
+        console.log(userData)
+        res.redirect("/login");
     })
   })
 })
 
 
 router.post("/login", passport.authenticate("local", {
-  failureRedirect: "/create"
+  failureRedirect: "/login",
+  failureFlash:true
 }),
-  function async(req, res) {
-    const { username } = req.body;
-    if (username.toLowerCase() === 'admin') {
-      res.redirect("/admin");
-    } else {
-      res.redirect("/new");
-    }
-  });
-router.get("/logout", function (req, res) {
-  req.logout(function (err) {
-    if (err) { return next(err); }
-    res.redirect('/');
+function(req, res) {
+  if (!req.isAuthenticated()) {
+    return res.redirect("/register");
+  }
+  const { usedBy } = req.body;
+  const isAdmin = usedBy === 'admin';
+  const isDoctor = usedBy === 'doctor';
+  if (isAdmin) {
+    res.redirect('/admin');
+  } else if (isDoctor) {
+    res.redirect('/doc-ui');
+  } else {
+    console.log(usedBy)
+    res.redirect('/profile');
+  }
+});
+
+router.get('/logout', (req, res) => {
+  req.logout((err)=> {
+    if (err) {
+      return next(err)
+  }
+  res.redirect('/login')
   })
 })
-
-
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) return next();
-  res.redirect("/");
+  res.redirect("/login");
 }
 module.exports = router;

@@ -19,10 +19,10 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  // fullname: {
-  //   type: String,
-  //   required: true,
-  // },
+  usedBy: {
+    type: String,
+    required: true,
+  },
 });
 
 

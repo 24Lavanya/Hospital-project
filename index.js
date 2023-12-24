@@ -31,6 +31,7 @@ app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
 //session middleware
+app.use(flash());
 app.use(expressSession({
   resave: false,
   saveUninitialized: false,
@@ -40,7 +41,7 @@ app.use(expressSession({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(flash());
+
 app.use(flashe())
 app.use((req, res, next) => {
   res.locals.message = req.flash('message');
@@ -58,15 +59,11 @@ var usersRouter = require('./routes/backend/users');
 
 
 
-
-
-
-
-
-
 app.get("/", (req, res) => {
-  res.render('./frontend/login.ejs');
+  res.render('../views/frontend/login.ejs');
 });
+
+
 
 //admin
 let admin = require("./routes/backend/admin");
@@ -82,6 +79,8 @@ let addPat = require("./routes/backend/Patient/patientRoute");
 let appo = require('./routes/backend/appointmentListRoute');
 let addAppo = require("./routes/backend/appointmentRoute");
 
+
+
 app.use("", admin);
 
 app.use("", dept);
@@ -95,7 +94,6 @@ app.use("", addPat);
 
 app.use("", appo);
 app.use("", addAppo);
-
 
 //admin ends
 

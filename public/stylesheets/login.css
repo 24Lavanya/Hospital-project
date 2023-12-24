@@ -14,8 +14,8 @@ section{
 }
 .form-box{
     /* position: relative; */
-    height: 20%;
-    display: flex;
+    min-height: 20%;
+    /* display: flex; */
     justify-content: center;
     align-items: center;
     background-color:white;
@@ -23,14 +23,14 @@ section{
 }
 .form-value{
     display:flex;
+    flex-direction: column;
     justify-content:center;
     align-items:center;
     /* border: 2px solid black; */
-    height: 30em;
+    min-height: 30em;
 }
 h2{
     font-size: 2em;
-    color:black;
     text-align:center;
 }
 .inputbox{
@@ -91,3 +91,8 @@ h2{
 .sign up p a:hover{
     text-decoration:underline;
 }
+.alert-container{
+    margin: 10px 0;
+    height: 2vh;
+    /* border:2px solid red; */
+  }

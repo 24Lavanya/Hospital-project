@@ -36,7 +36,7 @@ router.post("/admin/submit-appointment", async (req, res) => {
       message: req.body.message,
     });
     req.flash('success', 'Appointment booked!!!');
-    res.redirect('/new');
+    res.redirect('/profile');
   } catch (error) {
     console.log(error);
     req.flash('danger', `Error: ${error}`);
@@ -54,6 +54,17 @@ router.get('/admin/appointment', async (req, res) => {
     res.redirect('/admin/appointment');
   }
 });
+const renderDoctorUI = async (req, res) => {
+  try {
+    const appointments = await appoModel.find().exec();
+    console.log('Appointments:', appointments);
+    res.render('../views/frontend/doctorui.ejs', { appointments });
+  } catch (error) {
+    console.error(error);
+    req.flash('danger', `Error: ${error}`);
+  }
+};
+router.get("/doc-ui", renderDoctorUI);
 
 // Edit
 router.get('/admin/appointment/edit/:id', async (req, res) => {
@@ -70,6 +81,7 @@ router.get('/admin/appointment/edit/:id', async (req, res) => {
     res.redirect('/admin/appointment');
   }
 });
+
 
 router.post('/admin/appointment/edit/:id', async (req, res) => {
   const id = req.params.id;

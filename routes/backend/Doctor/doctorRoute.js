@@ -40,19 +40,29 @@ router.get("/admin/doctor", async (req, res) => {
 });
 
 
-router.get("/new", async (req, res) => {
+router.get("/profile", async (req, res) => {
   try {
-    // console.log("Before fetching doctors data");
     const doctors = await doctorModel.find().exec();
     // console.log("Doctors data:", doctors);
-    res.render('../views/frontend/new.ejs', { doctors:doctors });
+    res.render('../views/frontend/profile.ejs', { doctors:doctors });
   } catch (error) {
     console.log(error);
     req.flash('danger', `Error: ${error}`);
-    res.redirect('/admin/doctor'); // Redirect to handle errors
+    res.redirect('/profile'); // Redirect to handle errors
   }
 });
 
+// Route handler
+router.get("/doc-ui", async (req, res) => {
+  try {
+    const doctors = await doctorModel.find().exec();
+    // console.log('Doctors:', doctors);
+    res.render('../views/frontend/doctorui.ejs', { doctors: doctors });
+  } catch (error) {
+    console.error(error);
+    req.flash('danger', `Error: ${error}`);
+  }
+});
 
 //edit
 router.get('/admin/doctor/edit/:id',async (req, res) => {
