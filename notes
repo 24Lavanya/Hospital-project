@@ -1,0 +1,19 @@
+<!-- req.body:
+
+Think of it like a bag that carries information from the user to the server.
+When you submit a form on a website (like entering a username and password), the entered data is put into this bag (req.body).
+In your code, you use req.body to get the username and role that the user entered in the login form.
+req.user:
+
+After you submit your form, the server checks if your username and password are correct (authentication).
+If they are correct, the server puts information about you into another bag (req.user).
+This bag (req.user) contains details about the user who just logged in, like their username and role.
+In your code, you use req.user to get the authenticated user's information, specifically the role.
+In your login route, you're doing the following:
+
+You check req.user to see who the user is (like a doctor or an admin) after they've successfully logged in.
+You also check req.body to see what the user entered in the login form.
+So, in simpler terms:
+
+req.body is like looking at what the user just typed or submitted.
+req.user is like looking at who the user is after they've successfully logged in. -->

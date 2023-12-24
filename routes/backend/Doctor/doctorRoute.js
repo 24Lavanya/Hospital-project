@@ -15,6 +15,7 @@ router.post("/admin/add-doctor", async(req, res) => {
         department: req.body.dept,
         dob: req.body.dob,
         email: req.body.email,
+        istop: req.body.istop==='true',
         exp: req.body.exp,
         gender: req.body.gender,
         address: req.body.address,
@@ -56,8 +57,10 @@ router.get("/profile", async (req, res) => {
 router.get("/doc-ui", async (req, res) => {
   try {
     const doctors = await doctorModel.find().exec();
-    // console.log('Doctors:', doctors);
-    res.render('../views/frontend/doctorui.ejs', { doctors: doctors });
+    if (req.isAuthenticated()) {
+      const username = req.user.username;
+      res.render('../views/frontend/doctorui.ejs', { doctors, username });
+    }
   } catch (error) {
     console.error(error);
     req.flash('danger', `Error: ${error}`);
@@ -91,6 +94,7 @@ router.post('/admin/doctor/edit/:id', async (req, res) => {
       dob: req.body.dob,
       phoneNo: req.body.Mobile,
       email: req.body.email,
+      istop: req.body.istop==='true',
       exp: req.body.exp,
       gender: req.body.gender,
       address: req.body.address,

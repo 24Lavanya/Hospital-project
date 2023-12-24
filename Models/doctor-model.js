@@ -22,6 +22,10 @@ const doctorSchema = mongoose.Schema({
         // required: true,
         // unique: true,
     },
+    istop:{
+        type: Boolean,
+        default:false,
+    },
     exp: {
         type: Number,
         // required: true, 

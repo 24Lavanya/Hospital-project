@@ -23,8 +23,8 @@ router.get('/doc-ui', (req, res) => {
   res.render('../views/frontend/doctorui.ejs')
 })
 router.post("/register", function (req, res) {
-  const { username,email,usedBy } = req.body;
-  const userData = new userModel({ username, email, usedBy });
+  const { username,email,role } = req.body;
+  const userData = new userModel({ username, email, role });
   userModel.register(userData, req.body.password)
     .then(function () {
       passport.authenticate("local")(req, res, function () {
@@ -43,16 +43,14 @@ function(req, res) {
   if (!req.isAuthenticated()) {
     return res.redirect("/register");
   }
-  const { usedBy } = req.body;
-  const isAdmin = usedBy === 'admin';
-  const isDoctor = usedBy === 'doctor';
-  if (isAdmin) {
-    res.redirect('/admin');
-  } else if (isDoctor) {
+  const { role } = req.user;  ///user because i am requesting which is already there
+  console.log(role)
+  if (role==='doctor') {
     res.redirect('/doc-ui');
-  } else {
-    console.log(usedBy)
+  } else if (role==='user') {
     res.redirect('/profile');
+  } else {
+    res.redirect('/admin');
   }
 });
 

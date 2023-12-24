@@ -50,6 +50,10 @@
           </td>
         </tr>
         <tr>
+          <td><label>Top doctor</label></td>
+          <td><input type="checkbox" name="istop" <%= doctor.istop ? 'checked' : '' %> value="true"></td>
+        </tr>
+        <tr>
           <td><label>Experience</label></td>
           <td><input type="number" name="exp" value="<%= doctor.exp %>"></td>
         </tr>

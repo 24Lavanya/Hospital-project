@@ -65,7 +65,6 @@ const renderDoctorUI = async (req, res) => {
   }
 };
 router.get("/doc-ui", renderDoctorUI);
-
 // Edit
 router.get('/admin/appointment/edit/:id', async (req, res) => {
   const id = req.params.id;

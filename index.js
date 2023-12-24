@@ -60,7 +60,7 @@ var usersRouter = require('./routes/backend/users');
 
 
 app.get("/", (req, res) => {
-  res.render('../views/frontend/login.ejs');
+  res.render('../views/frontend/create.ejs');
 });
 
 

@@ -106,35 +106,38 @@
             <div class="swiper-wrapper">
 
                 <% doctors.forEach((doctor)=> { %>
-                    <!-- Slides -->
-                    <div class="swiper-slide">
-                        <center>
-                            <div class="card">
-                                <div class="card-card">
-                                <% if (doctor.gender==='male') { %>
-                                    <img src="https://images.unsplash.com/photo-1612276529731-4b21494e6d71?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" srcset="">
-                                    <!-- <p>The condition is true.</p> -->
-                                <% } else if (doctor.gender==='female') { %>
-                                    <img src="https://img.freepik.com/free-photo/portrait-doctor_144627-39391.jpg?t=st=1702397262~exp=1702397862~hmac=19c51c894d2243868e652290ae1584d420fd51370ca7255e70728e4bd894adfd" alt="" srcset="">
-                                    <!-- <p>The condition is false.</p> -->
-                                <% } %>
-                                <div class="card-content">
-                                    <!-- <h3></h3>
-                            <h3></h3>
-                            <p>Lorem ipsum dolor sit amet,consectetur</p>
-                            <a href="" class="btn">Read More</a> -->
-                                    Meet Dr.<%= doctor.doctorname %> , who is <%= doctor.department %>. With a wealth of
-                                            experience spanning <%= doctor.exp %> years, Dr. is dedicated to delivering
-                                                top-notch medical care. Dr. combines skillful precision with a
-                                                patient-centered approach. Dr. is committed to ensuring the well-being
-                                                of each patient, backed by a passion for continuous learning and staying
-                                                abreast of the latest advancements in the field."
+                    <% if (doctor.istop) { %>
+                        <div class="swiper-slide">
+                            <center>
+                                <div class="card">
+                                    <div class="card-card">
+                                    <% if (doctor.gender==='male') { %>
+                                        <img src="https://images.unsplash.com/photo-1612276529731-4b21494e6d71?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" srcset="">
+                                        <!-- <p>The condition is true.</p> -->
+                                    <% } else if (doctor.gender==='female') { %>
+                                        <img src="https://img.freepik.com/free-photo/portrait-doctor_144627-39391.jpg?t=st=1702397262~exp=1702397862~hmac=19c51c894d2243868e652290ae1584d420fd51370ca7255e70728e4bd894adfd" alt="" srcset="">
+                                        <!-- <p>The condition is false.</p> -->
+                                    <% } %>
+                                    <div class="card-content">
+                                        <!-- <h3></h3>
+                                <h3></h3>
+                                <p>Lorem ipsum dolor sit amet,consectetur</p>
+                                <a href="" class="btn">Read More</a> -->
+                                        Meet Dr.<%= doctor.doctorname %> , who is <%= doctor.department %>. With a wealth of
+                                                experience spanning <%= doctor.exp %> years, Dr. is dedicated to delivering
+                                                    top-notch medical care. Dr. combines skillful precision with a
+                                                    patient-centered approach. Dr. is committed to ensuring the well-being
+                                                    of each patient, backed by a passion for continuous learning and staying
+                                                    abreast of the latest advancements in the field."
+                                    </div>
                                 </div>
-                            </div>
-                            </div>
-                        </center>
-                    </div>
-
+                                </div>
+                            </center>
+                        </div>
+    
+                    <% } %>
+                    <!-- Slides -->
+                   
                     <% }) %>
             </div>
             <!-- If we need pagination -->
@@ -401,7 +404,7 @@
                             <label for="time">Preferred Time</label>
                             <input type="time" name="time" required>
 
-                            <label for="message">Additional Information</label>
+                            <label for="message">Cause</label>
                             <textarea id="message" name="message" rows="4"></textarea>
 
                             <button type="submit">Submit Appointment</button>

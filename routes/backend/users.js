@@ -19,7 +19,7 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  usedBy: {
+  role: {
     type: String,
     required: true,
   },

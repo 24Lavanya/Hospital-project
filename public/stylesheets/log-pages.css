@@ -28,6 +28,7 @@ section{
     align-items:center;
     /* border: 2px solid black; */
     min-height: 30em;
+    padding: 10px 0;
 }
 h2{
     font-size: 2em;
@@ -40,6 +41,8 @@ h2{
     min-width:310px;
     border-bottom: 2px solid black;
 }
+
+
 .inputbox label{
     position:absolute;
     top:50%;
@@ -92,3 +95,12 @@ h2{
 .log in p a:hover{
     text-decoration:underline;
 }
+.inputbox:nth-child(3){
+    border-bottom: none;
+}
+
+.alert-container{
+    margin: 10px 0;
+    height: 2vh;
+    /* border:2px solid red; */
+  }
