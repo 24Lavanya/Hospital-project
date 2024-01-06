@@ -1,63 +1,111 @@
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Hospital-Doctor</title>
-        <link rel="stylesheet" href="/stylesheets/docui.css">
-    </head>
-    <body>
-       
+<!DOCTYPE html>
+<html lang="en">
 
-        
-        <% doctors.forEach((doctor) => { %>
-            <% if (doctor.doctorname === username) { %>
-                <div class="doc-profile">
-                    <div class="doc-img">
-                        <% if (doctor.gender === 'male') { %>
-                            <img src="https://images.unsplash.com/photo-1612276529731-4b21494e6d71?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" srcset="">
-                        <% } else if (doctor.gender === 'female') { %>
-                            <img src="https://img.freepik.com/free-photo/portrait-doctor_144627-39391.jpg?t=st=1702397262~exp=1702397862~hmac=19c51c894d2243868e652290ae1584d420fd51370ca7255e70728e4bd894adfd" alt="" srcset="">
-                        <% } %>
-                    </div>
-                    <div class="details">
-                        <h1>Dr. <%= doctor.doctorname %></h1>
-                        <p>Specialist in: <%= doctor.department %></p>
-                        <button class="update-btn">Update</button>
-                    </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital-Doctor</title>
+    <link rel="stylesheet" href="/stylesheets/docui.css">
+</head>
+
+<body>
+
+
+
+    <% doctors.forEach((doctor)=> { %>
+        <% if (doctor.doctorname===username) { %>
+            <div class="doc-profile">
+                <div class="doc-img">
+                    <% if (doctor.gender==='male' ) { %>
+                        <img src="https://images.unsplash.com/photo-1612276529731-4b21494e6d71?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                            alt="" srcset="">
+                        <% } else if (doctor.gender==='female' ) { %>
+                            <img src="https://img.freepik.com/free-photo/portrait-doctor_144627-39391.jpg?t=st=1702397262~exp=1702397862~hmac=19c51c894d2243868e652290ae1584d420fd51370ca7255e70728e4bd894adfd"
+                                alt="" srcset="">
+                            <% } %>
                 </div>
-            <% } %>
-        <% }); %>
-            <div class="patient-list">
-                <div class="schedule">
-                    <h2>Schedule</h2>
-                    <table>
-                        <thead>
-                            <th>Patient name</th>
-                            <th>Age</th>
-                            <th>Phone No.</th>
-                            <th>Cause</th>
-                            <th>Preferred date</th>
-                            <th>Preferred time</th>
-                            <th>Actions</th>
-                        </thead>
-                        <tbody>
-                            <td>ABC</td>
-                            <td>25</td>
-                            <td>7410852963</td>
-                            <td>Fever</td>
-                            <td>26-12-23</td>
-                            <td>1:00pm</td>
-                            <td>
-                                <button>Approve</button>
-                                <button>Reject</button>
-                            </td>
-                        </tbody>
-                    </table>
-    
+                <div class="details">
+                    <h1>Dr. <%= doctor.doctorname %>
+                    </h1>
+                    <p>Specialist in: <%= doctor.department %>
+                    </p>
+                    <!-- <button class="update-btn">Update</button>
+                    <button class="update-btn"> <a href="/logout">
+                        Logout
+                    </a></button>  
+                     -->
+                     <div class="btns">
+                        <a href="#" class="update-btn">
+                            Update
+                        </a>
+                        <a href="/logout" class="update-btn">
+                            Logout
+                        </a>
+                    </div>
                 </div>
             </div>
-            
+            <% } %>
+                <% }); %>
 
-    </body>
-    </html>
+
+
+                    <!-- Patients -->
+
+                    <div class="patient-list">
+                        <div class="schedule">
+                            <h2>Schedule</h2>
+                            <table>
+                                <thead>
+                                    <th>Patient name</th>
+                                    <th>Age</th>
+                                    <th>Phone No.</th>
+                                    <th>Cause</th>
+                                    <th>Preferred date</th>
+                                    <th>Preferred time</th>
+                                    <th>Actions</th>
+                                </thead>
+                                <tbody>
+                                    <% appo.forEach((appointment)=> { %>
+                                        <% if (appointment.doctorname===username && appointment.status==='Pending' ) { %>
+                                            <%= console.log(appointment.doctorname) %>
+                                                <tr>
+                                                    <td>
+                                                        <%= appointment.patientName %>
+                                                    </td>
+                                                    <td>
+                                                        <%= appointment.age %>
+                                                    </td>
+                                                    <td>
+                                                        <%= appointment.phone %>
+                                                    </td>
+                                                    <td>
+                                                        <%= appointment.cause %>
+                                                    </td>
+                                                    <td>
+                                                        <%= appointment.date %>
+                                                    </td>
+                                                    <td>
+                                                        <%= appointment.time %>
+                                                    </td>
+                                                    <td>
+                                                            <form action="/doc-ui/approve-appointment/<%= appointment._id %>"
+                                                            method="POST">
+                                                            <button type="submit" class="approve-btn">Approve</button>
+                                                            </form>
+                                                            <form action="/doc-ui/reject-appointment/<%= appointment._id %>"
+                                                                method="POST">
+                                                                <button type="submit" class="reject-btn">Reject</button>
+                                                            </form>
+                                                    </td>
+                                                </tr>
+                                                <% } %>
+
+                                                    <% }) %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+</body>
+
+</html>

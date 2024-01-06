@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const doctorModel = require("../../../Models/doctor-model");
-
+const appoModel=require('../../../Models/appointment-model')
 router.get("/admin/add-doctor", (req, res) => {
   res.render("../views/frontend/doctor-form.ejs");
 });
@@ -44,8 +44,13 @@ router.get("/admin/doctor", async (req, res) => {
 router.get("/profile", async (req, res) => {
   try {
     const doctors = await doctorModel.find().exec();
+    const bookedAppos = await appoModel.find().exec();
     // console.log("Doctors data:", doctors);
-    res.render('../views/frontend/profile.ejs', { doctors:doctors });
+    if (req.isAuthenticated()) {         //if i dont use this i cant req for username
+      const username = req.user.username;
+      res.render('../views/frontend/profile.ejs', { doctors,username,bookedAppos });
+    }
+    
   } catch (error) {
     console.log(error);
     req.flash('danger', `Error: ${error}`);
@@ -57,9 +62,13 @@ router.get("/profile", async (req, res) => {
 router.get("/doc-ui", async (req, res) => {
   try {
     const doctors = await doctorModel.find().exec();
-    if (req.isAuthenticated()) {
+    const appo = await appoModel.find({ status: 'Pending' });
+    // var appo = await appoModel.find({ status: 'Approved' }).exec();
+    console.log(appo)
+    // console.log(doctors, appo);
+    if (req.isAuthenticated()) {         //if i dont use this i cant req for username
       const username = req.user.username;
-      res.render('../views/frontend/doctorui.ejs', { doctors, username });
+      res.render('../views/frontend/doctorui.ejs', { doctors, username,appo });
     }
   } catch (error) {
     console.error(error);
@@ -67,6 +76,32 @@ router.get("/doc-ui", async (req, res) => {
   }
 });
 
+
+router.post('/doc-ui/approve-appointment/:id', async (req, res) => {
+  try {
+    const appointmentId = req.params.id;
+    
+    const appro = await appoModel.findByIdAndUpdate(appointmentId, { status: 'Approved' });
+    console.log(appro)
+    res.redirect('/doc-ui');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+router.post('/doc-ui/reject-appointment/:id', async (req, res) => {
+  try {
+    const appointmentId = req.params.id;
+
+    await appoModel.findByIdAndUpdate(appointmentId, { status: 'Rejected' });
+
+    res.redirect('/doc-ui');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+});
 //edit
 router.get('/admin/doctor/edit/:id',async (req, res) => {
   const id = req.params.id;

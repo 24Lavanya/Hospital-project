@@ -9,6 +9,10 @@ const appointmentSchema = new mongoose.Schema({
       doctorname: {
         type: String,
         required: true
+  },
+  age: {
+    type: Number,
+    required:true
       },
       phone: {
         type: Number,
@@ -22,10 +26,15 @@ const appointmentSchema = new mongoose.Schema({
         type: String,
         required: true
       },
-      message: {
+      cause: {
         type: String
-      },
-    // striked: { type: Boolean, default: false },
+  },
+    status: {
+        type: String,
+        enum: ['New','Pending', 'Approved', 'Rejected'],
+        default: 'New',
+  } 
+    
 });
   
 module.exports = mongoose.model('Appointment', appointmentSchema);

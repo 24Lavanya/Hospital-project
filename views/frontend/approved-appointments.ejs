@@ -25,7 +25,8 @@
   </button>
         <!-- Doctor Form Content -->
         <form id="appo-form" class="form2 active-active">
-          <div class="alert-container">
+        
+          <div class="alert-container-appo ">
             
             <% if (flashMessage.success) { %>
               <div class="alert alert-success alert-dismissal ">
@@ -54,7 +55,7 @@
                 </tr>
             </thead>
             <tbody>
-              <% appointments.forEach((row,index) => { %>
+              <% approvedAppo.forEach((row,index) => { %>
                 <tr>
                   <td><%= index+1 %></td>
                   <td><%= row.patientName %></td>
@@ -66,8 +67,6 @@
                   <td><%= row.cause %></td>
                   <td><center>
                     <!-- <button class="btn-list" ><a href="/admin/appointment/edit/">Edit</a></button> -->
-                    <button class="btn-list"><form action="/admin/appointment/approve/<%= row._id %>" method="POST">
-                     <button type="submit" class="approve-btn">Approve</button></form></button>
                     <button class="btn-list" ><a href="/admin/appointment/delete/<%= row._id %>">Delete</a></button></td>
                   </center></tr>
               <% }) %>

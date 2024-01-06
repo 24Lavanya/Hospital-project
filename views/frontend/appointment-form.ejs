@@ -19,6 +19,11 @@
             Add appointment
         </a>
     </button>
+    <button class="btn" id="appr-appo" >
+      <a href="/admin/appointment/approved" >
+          Approved appointments
+      </a>
+  </button>
     <form id="addAppoForm" action="/admin/add-appointment" method="post">
       <h2 align="center">Appointment Details</h2>
       <table>
@@ -29,6 +34,10 @@
         <tr>
           <td><label for="doctorname">Doctor Name</label></td>
           <td><input type="text" id="doctorname" name="doctorname" required></td>
+        </tr>
+        <tr>
+          <td><label for="age">Age</label></td>
+          <td><input type="number" id="age" name="age" required></td>
         </tr>
         <tr>
           <td><label for="phone">Phone Number</label></td>
@@ -43,8 +52,8 @@
           <td><input type="time" id="time" name="time" required></td>
         </tr>
         <tr>
-          <td><label for="message">Additional Information</label></td>
-          <td><textarea id="message" name="message" rows="4"></textarea></td>
+          <td><label for="cause">Cause</label></td>
+          <td><textarea id="cause" name="cause" rows="4"></textarea></td>
         </tr>
         <tr>
           <td></td>

@@ -20,6 +20,10 @@
           <td><input type="text" id="doctorname" name="doctorname" required value="<%= appointment.doctorname %>"></td>
         </tr>
         <tr>
+          <td><label for="age">Age</label></td>
+          <td><input type="number" id="age" name="age" required value="<%= appointment.age %>"></td>
+        </tr>
+        <tr>
           <td><label for="phone">Phone Number</label></td>
           <td><input type="number" id="phone" name="phone" required value="<%= appointment.phone %>"></td>
         </tr>
@@ -32,8 +36,8 @@
           <td><input type="time" id="time" name="time" required value="<%= appointment.time %>"></td>
         </tr>
         <tr>
-          <td><label for="message">Additional Information</label></td>
-          <td><textarea id="message" name="message" rows="4"><%= appointment.message %></textarea></td>
+          <td><label for="cause">Cause</label></td>
+          <td><textarea id="cause" name="cause" rows="4"><%= appointment.cause %></textarea></td>
         </tr>
         <tr>
           <td></td>

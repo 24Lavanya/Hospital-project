@@ -17,7 +17,9 @@
     border-right: 1px solid rgb(255 255 255 / 0.4);
   }
 
-
+#message-box{
+  background-color:none;
+}
 .navbar {
     display: flex;
     height: 14vh;
@@ -54,6 +56,33 @@
   .btns{
     display: flex;
   }
+  .message-box {
+    position: relative;
+    cursor: pointer;
+}
+
+.status-box {
+    display: none;
+    min-width: 400px;
+    position: absolute;
+    top: 105%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.status-box td{
+  padding: 10px;
+  margin: 0 12px;
+  /* border-bottom: 1px solid #2f758f; */
+}
+
+.message-box:hover .status-box {
+    display: block;
+}
   .btn-green {  
     margin: 0 5px;
     font-size: 18px;

@@ -12,10 +12,11 @@ router.post("/admin/add-appointment", async (req, res) => {
     await appoModel.create({
       patientName: req.body.patientName,
       doctorname: req.body.doctorname,
+      age: req.body.age,
       phone: req.body.phone,
       date: req.body.date,
       time: req.body.time,
-      message: req.body.message,
+      cause: req.body.cause,
     });
     req.flash('success', 'Added successfully');
     res.redirect('/admin/appointment');
@@ -27,15 +28,18 @@ router.post("/admin/add-appointment", async (req, res) => {
 
 router.post("/admin/submit-appointment", async (req, res) => {
   try {
-    await appoModel.create({
+    const bookedAppo= await appoModel.create({
       patientName: req.body.patientName,
       doctorname: req.body.doctorname,
+      age: req.body.age,
       phone: req.body.phone,
       date: req.body.date,
       time: req.body.time,
-      message: req.body.message,
+      cause: req.body.cause,
+      status:'New',
     });
     req.flash('success', 'Appointment booked!!!');
+    
     res.redirect('/profile');
   } catch (error) {
     console.log(error);
@@ -43,10 +47,12 @@ router.post("/admin/submit-appointment", async (req, res) => {
   }
 });
 
+
 router.get('/admin/appointment', async (req, res) => {
   try {
     const appointments = await appoModel.find().exec();
     const flashMessage = req.flash();
+    console.log(appointments);
     res.render('../views/frontend/appointment-list.ejs', { appointments, flashMessage });
   } catch (error) {
     console.log(error);
@@ -54,17 +60,29 @@ router.get('/admin/appointment', async (req, res) => {
     res.redirect('/admin/appointment');
   }
 });
-const renderDoctorUI = async (req, res) => {
+router.get('/admin/appointment/approved', async (req, res) => {
   try {
-    const appointments = await appoModel.find().exec();
-    console.log('Appointments:', appointments);
-    res.render('../views/frontend/doctorui.ejs', { appointments });
+    const approvedAppo = await appoModel.find({ status: 'Approved' })
+    const flashMessage = req.flash();
+    res.render('../views/frontend/approved-appointments.ejs',{approvedAppo,flashMessage})
   } catch (error) {
     console.error(error);
-    req.flash('danger', `Error: ${error}`);
+    res.status(500).send('Internal Server Error');
   }
-};
-router.get("/doc-ui", renderDoctorUI);
+}) 
+router.post('/admin/appointment/approve/:id', async (req, res) => {
+  try {
+    const appointmentId = req.params.id;
+    const appoData = await appoModel.findByIdAndUpdate(appointmentId, { status: 'Pending' });
+    console.log(appoData)
+    res.redirect('/admin/appointment');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+
 // Edit
 router.get('/admin/appointment/edit/:id', async (req, res) => {
   const id = req.params.id;
@@ -81,7 +99,6 @@ router.get('/admin/appointment/edit/:id', async (req, res) => {
   }
 });
 
-
 router.post('/admin/appointment/edit/:id', async (req, res) => {
   const id = req.params.id;
 
@@ -89,10 +106,11 @@ router.post('/admin/appointment/edit/:id', async (req, res) => {
     const appointments = await appoModel.findByIdAndUpdate(id, {
       patientName: req.body.patientName,
       doctorname: req.body.doctorname,
+      age:req.body.age,
       phone: req.body.phone,
       date: req.body.date,
       time: req.body.time,
-      message: req.body.message,
+      cause: req.body.cause,
     });
 
     if (!appointments) {

@@ -12,12 +12,12 @@ const passport = require('passport');
 const { request } = require('https');
 const flash = require('connect-flash');
 const flashe = require('express-flash');
-const doctorModel = require('./Models/doctor-model');
 
 const port = process.env.PORT || 3000;
 mongoose
   .connect(
-    process.env.MONGODB_URL
+    process.env.MONGODB_URL, 
+    
   )
   .then((response) => console.log("Connected to database"))
   .catch((error) => console.log(error));

@@ -28,10 +28,34 @@
                 <li><a href="#">Doctor</a></li>
                 <li><a href="#">Services</a></li>
                 <li><a href="#">Directions</a></li>
+               
                 
                 <div class="btns">
                     <a href="#book" class="btn-green">
                         <i class="fas fa-calendar-week"></i>Book an appointment
+                    </a>
+                    <a href="#" class="btn-green message-box">
+                        <i class="fas fa-message"></i>
+                            <div class="status-box">
+                                <h3>Appointment Status</h3><hr>
+                                <% bookedAppos.forEach((book) => { %>
+                                    <% if (book.patientName===username) { %>
+                                            <% if (book.status==='Approved') { %>
+                                                <p>Your appointment on <%= book.date %> for slot <%= book.time %> with Dr.<%= book.doctorname %> has been <%= book.status %>
+                                                <% } else if (book.status==='Rejected') { %>
+                                                    <p>Your appointment on <%= book.date %> for slot <%= book.time %> with Dr.<%= book.doctorname %> has been <%= book.status %>
+                                                    <% } else if (book.status==='New'){ %>
+                                                        <p>Your appointment on <%= book.date %> for slot <%= book.time %> with Dr.<%= book.doctorname %> <%= book.patientName %>is pending
+                                                        <% }else if (book.status==='Pending') { %>
+                                                            <p>Your appointment on <%= book.date %> for slot <%= book.time %> with Dr.<%= book.doctorname %> has been <%= book.status %>
+                                                            <% } %>
+                                                        
+                                                        <hr>
+                                                    </p>
+                                                    <% } %>
+                                <% }) %>
+                               
+                            </div>
                     </a>
                     <a href="/logout" class="btn-green">
                         Logout
@@ -382,7 +406,7 @@
                         <form action="/admin/submit-appointment" method="POST" id="appointment-form">
                             <h1>Book an Appointment</h1>
                             <div class="alert-container">
-                                <div class="book-alert">
+                                <div class="alert alert-success alert-dismissal ">
                                     <p>
                                         <%= messages.success %>
                                     </p>
@@ -394,6 +418,8 @@
                             <label for="doctorname">Doctor Name</label>
                             <input type="text" name="doctorname" required>
 
+                            <label for="age">Age</label>
+                            <input type="number" name="age" required>
 
                             <label for="phone">Phone Number</label>
                             <input type="tel" name="phone" required>
@@ -404,8 +430,8 @@
                             <label for="time">Preferred Time</label>
                             <input type="time" name="time" required>
 
-                            <label for="message">Cause</label>
-                            <textarea id="message" name="message" rows="4"></textarea>
+                            <label for="cause">Cause</label>
+                            <textarea id="cause" name="cause" rows="4"></textarea>
 
                             <button type="submit">Submit Appointment</button>
                         </form>
