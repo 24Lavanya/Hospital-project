@@ -65,6 +65,36 @@
           <td><input type="number" name="exp" ></td>
         </tr>
         <tr>
+          <td><label>Education:</label></td>
+          <td>
+            <input
+              type="text"
+              id="edu"
+              name="education"
+              placeholder="Enter your qualification"
+              required
+            /><br />
+          </td>
+        </tr>
+        <tr>
+          <td><label>Available Time Slot:</label></td>
+          <!-- <td>
+            <select name="slot" id="">
+              <option value="slot1">9:00 AM - 11:00 AM</option>
+              <option value="slot2">11:00 AM - 1:00 PM</option>
+              <option value="slot3">1:00 PM - 3:00 PM</option>
+              <option value="slot4">3:00 PM - 5:00 PM</option>
+              <option value="slot5">5:00 PM - 7:00 PM</option>
+              <option value="slot6">7:00 PM - 9:00 PM</option>
+            </select>
+          </td> -->
+            <td id="timeSlotsContainer">
+              <button type="button" onclick="addTimeSlot()">Add Time Slot</button>
+            </td>
+            <br />
+          
+        </tr>
+        <tr>
           <td><label>Gender:</label></td>
           <td>
             <label for="male">Male
@@ -119,3 +149,33 @@
       </table>
     </form>
     <br />
+
+    <script>
+       function addTimeSlot() {
+    const timeSlotsContainer = document.getElementById('timeSlotsContainer');
+
+    const timeSlotTr = document.createElement('tr');
+    timeSlotTr.classList.add('time-slot');
+
+    timeSlotTr.innerHTML = `
+      <td>
+        <label>Start Time:</label>
+        <input type="time" name="startTime[]" required>
+      </td>
+      <td>
+        <label>End Time:</label>
+        <input type="time" name="endTime[]" required>
+      </td>
+      <td>
+        <button type="button" onclick="removeTimeSlot(this)">Remove</button>
+      </td>
+    `;
+
+    timeSlotsContainer.appendChild(timeSlotTr);
+  }
+
+  function removeTimeSlot(buttonElement) {
+    const timeSlotTr = buttonElement.parentElement.parentElement;
+    timeSlotTr.remove();
+  }
+    </script>

@@ -58,7 +58,36 @@
           <td><input type="number" name="exp" value="<%= doctor.exp %>"></td>
         </tr>
         <tr>
+          <td><label>Education:</label></td>
+          <td>
+            <input
+              type="text"
+              id="edu"
+              name="education"
+              placeholder="Enter your qualification"
+              value="<%= doctor.education  %>"
+              required
+            /><br />
+          </td>
+        </tr>
         <tr>
+          <td><label>Available Time Slot:</label></td>
+          <td id="timeSlotsContainer">
+            <button type="button" onclick="addTimeSlot()">Add Time Slot</button>
+            <% if (doctor.slot && doctor.slot.length > 0) { %>
+              <% doctor.slot.forEach(timeSlot => { %>
+                <div>
+                  <label>Start Time:</label>
+                  <input type="time" name="startTime[]" value="<%= timeSlot.startTime %>" required>
+                  <label>End Time:</label>
+                  <input type="time" name="endTime[]" value="<%= timeSlot.endTime %>" required>
+                  <button type="button" onclick="removeTimeSlot(this)">Remove</button>
+                </div>
+              <% }) %>
+            <% } %>
+          </td>
+          <br />
+        </tr>
           <td><label>Gender:</label></td>
           <td>
             <input type="radio" id="male" name="gender" value="male" <%= doctor.gender === 'male' ? 'checked' : '' %> required>
@@ -115,3 +144,38 @@
       </table>
     </form>
     <br />
+    <script>
+      function addTimeSlot() {
+     const timeSlotsContainer = document.getElementById('timeSlotsContainer');
+
+     const timeSlotTr = document.createElement('tr');
+     timeSlotTr.classList.add('time-slot');
+
+     timeSlotTr.innerHTML = `
+     <td>
+    
+            <label>Start Time:</label>
+       <input type="time" name="startTime[]" required>
+     </td>
+     <td>
+       <label>End Time:</label>
+       <input type="time" name="endTime[]" required>
+       
+       </td>           
+                     
+                    
+      
+     <td>
+       <button type="button" onclick="removeTimeSlot(this)">Remove</button>
+    
+     </td> 
+     `;
+     //[] allows you to collect these values as arrays when the form is submitted.
+     timeSlotsContainer.appendChild(timeSlotTr);
+   }
+
+   function removeTimeSlot(buttonElement) {
+     const timeSlotTd = buttonElement.parentElement;
+     timeSlotTd.remove();
+   }
+   </script>

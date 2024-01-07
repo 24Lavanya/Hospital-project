@@ -46,10 +46,12 @@
                 <th>Department</th>
                 <th>DOB</th>
                 <th>Mobile No.</th>
-              <th>Email</th>
+                <th>Email</th>
               
               <th>Gender</th>
               <th>Experience</th>
+              <th>Education</th>
+              <th>Available Time Slot</th>
               <th>Address</th>
               <th>Actions</th>
                 <!-- Add other table headers as needed -->
@@ -66,6 +68,18 @@
                   <td><%= row.email  %></td>
                   <td><%= row.gender  %></td>
                   <td><%= row.exp %></td>
+                  <td><%= row.education %></td>
+                  <td>
+                    <ul>
+                      <% if (row.slot) { %>
+                        <% row.slot.map((timeSlot, index) => { %>
+                          <li><%= timeSlot.startTime %>-<%= timeSlot.endTime %></li>
+                        <% }) %>
+                      <% } else { %>
+                        <li>No available time slots</li>
+                      <% } %>
+                    </ul>
+                  </td>
                   <td><%= row.address  %></td>
                   <td><center><button class="btn-list"><a href="/admin/doctor/edit/<%= row._id %>">Edit</a></button>
                     <button class="btn-list"><a href="/admin/doctor/delete/<%= row._id %>">Delete</a></button></td>

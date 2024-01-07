@@ -30,6 +30,22 @@ const doctorSchema = mongoose.Schema({
         type: Number,
         // required: true, 
     },
+    education: {
+        type: String,
+        // required: true, 
+    },
+    startTime: {
+       type:Array
+    },
+    endTime: {
+        type:Array
+     },
+    slot: [
+        {
+          startTime: Array,
+          endTime: Array,
+        }
+      ],
     gender: {
         type: String,
         // required: true, 

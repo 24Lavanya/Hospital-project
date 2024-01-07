@@ -38,6 +38,7 @@ router.post("/admin/submit-appointment", async (req, res) => {
       cause: req.body.cause,
       status:'New',
     });
+    
     req.flash('success', 'Appointment booked!!!');
     
     res.redirect('/profile');
@@ -70,7 +71,7 @@ router.get('/admin/appointment/approved', async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 }) 
-router.post('/admin/appointment/approve/:id', async (req, res) => {
+router.post('/admin/appointment/approve-appointment/:id', async (req, res) => {
   try {
     const appointmentId = req.params.id;
     const appoData = await appoModel.findByIdAndUpdate(appointmentId, { status: 'Pending' });
@@ -82,7 +83,17 @@ router.post('/admin/appointment/approve/:id', async (req, res) => {
   }
 });
 
-
+router.post('/admin/appointment/reject-appointment/:id', async (req, res) => {
+  try {
+    const appointmentId = req.params.id;
+    const appoData = await appoModel.findByIdAndUpdate(appointmentId, { status: "Rejected" });
+    console.log(appoData)
+    res.redirect('/admin/appointment');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+});
 // Edit
 router.get('/admin/appointment/edit/:id', async (req, res) => {
   const id = req.params.id;
@@ -140,6 +151,21 @@ router.get('/admin/appointment/delete/:id', async (req, res) => {
     console.error(error);
     req.flash('danger', `Error: ${error}`);
     res.redirect('/admin/appointment');
+  }
+});
+
+router.get('/profile/appointment/delete/:id', async (req, res) => {
+  const id = req.params.id;
+  try {
+    const appointments = await appoModel.findByIdAndDelete(id);
+    if (!appointments) {
+      return res.redirect('/profile');
+    }
+    
+    res.redirect('/profile');
+  } catch (error) {
+    console.error(error);
+    req.flash('danger', `Error: ${error}`);
   }
 });
 

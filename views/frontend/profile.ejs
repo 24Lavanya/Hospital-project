@@ -29,34 +29,58 @@
                 <li><a href="#">Services</a></li>
                 <li><a href="#">Directions</a></li>
                
-                
                 <div class="btns">
                     <a href="#book" class="btn-green">
                         <i class="fas fa-calendar-week"></i>Book an appointment
                     </a>
-                    <a href="#" class="btn-green message-box">
+                    <a href="#" class="btn-green message-box" id="message-box">
                         <i class="fas fa-message"></i>
-                            <div class="status-box">
-                                <h3>Appointment Status</h3><hr>
-                                <% bookedAppos.forEach((book) => { %>
-                                    <% if (book.patientName===username) { %>
-                                            <% if (book.status==='Approved') { %>
-                                                <p>Your appointment on <%= book.date %> for slot <%= book.time %> with Dr.<%= book.doctorname %> has been <%= book.status %>
-                                                <% } else if (book.status==='Rejected') { %>
-                                                    <p>Your appointment on <%= book.date %> for slot <%= book.time %> with Dr.<%= book.doctorname %> has been <%= book.status %>
-                                                    <% } else if (book.status==='New'){ %>
-                                                        <p>Your appointment on <%= book.date %> for slot <%= book.time %> with Dr.<%= book.doctorname %> <%= book.patientName %>is pending
-                                                        <% }else if (book.status==='Pending') { %>
-                                                            <p>Your appointment on <%= book.date %> for slot <%= book.time %> with Dr.<%= book.doctorname %> has been <%= book.status %>
+                        <div class="status-box hidden">
+                            <div class="head">
+                                <h3>Appointment Status</h3>
+                                <hr>
+                                    </div>
+                                    <table class="status">
+                                        <% bookedAppos.forEach((book) => { %>
+                                            <% if (book.patientName===username) { %>
+                                                <tr>
+                                                    <% if (book.status==='Approved') { %>
+
+                                                            <td>Appointment on <%= book.date %> for slot <%= book.time %> with Dr.<%= book.doctorname %></td> 
+                                                            <td><%= book.status %></td>
+                                                            <td><a href="/profile/reject/<%= book._id %>">Delete</a></td>
+                                                            <% } else if (book.status==='Rejected') { %>
+                                                                <td>Appointment on <%= book.date %> for slot <%= book.time %> with Dr.<%= book.doctorname %></td> 
+                                                            <td><%= book.status %></td>
+                                                            <td><a href="/profile/reject/<%= book._id %>">Delete</a></td>
+                                                                <% } else if (book.status==='New'){ %>
+                                                                    <td>Appointment on <%= book.date %> for slot <%= book.time %> with Dr.<%= book.doctorname %></td> 
+                                                            <td>Pending</td>
+                                                            <td><a href="/profile/reject/<%= book._id %>">Delete</a></td>
+                                                                    <% }else if (book.status==='Pending') { %>
+                                                                        <td>Appointment on <%= book.date %> for slot <%= book.time %> with Dr.<%= book.doctorname %></td> 
+                                                            <td><%= book.status %></td>
+                                                            <td><a href="/profile/reject/<%= book._id %>">Delete</a></td>
+                                                                        <% } %>
+                                                        </tr>
+                                                       
+                                                                
+                                                                  
+                                                                
+                                                            </p>
                                                             <% } %>
-                                                        
-                                                        <hr>
-                                                    </p>
-                                                    <% } %>
-                                <% }) %>
-                               
-                            </div>
-                    </a>
+                                        <% }) %>
+                                        
+                                    </table>
+                                    </div>
+                                    <hr>
+                                    
+                                    
+                            </a>
+
+
+                </div>
+               
                     <a href="/logout" class="btn-green">
                         Logout
                     </a>
@@ -414,22 +438,33 @@
                             </div>
                             <label for="patientName">Your Name</label>
                             <input type="text" name="patientName" required>
-
+                            
                             <label for="doctorname">Doctor Name</label>
-                            <input type="text" name="doctorname" required>
-
-                            <label for="age">Age</label>
-                            <input type="number" name="age" required>
-
-                            <label for="phone">Phone Number</label>
-                            <input type="tel" name="phone" required>
-
-                            <label for="date">Preferred Date</label>
-                            <input type="date" name="date" required>
-
-                            <label for="time">Preferred Time</label>
-                            <input type="time" name="time" required>
-
+                            <select name="doctorname" id="doctorname" >
+                                <% doctors.forEach((row,index) => { %>
+                                    <option value="<%= row.doctorname %>" onselect="slotSelect(this)"><%= row.doctorname %></option>
+                                    <% }) %>  
+                                </select>
+                                <label for="age">Age</label>
+                                <input type="number" name="age" required>
+                                
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" name="phone" required>
+                                
+                                <label for="date">Preferred Date</label>
+                                <input type="date" name="date" required>
+                                
+                                <label for="time">Preferred Slot</label>
+                                <select name="bookSlot" id="time" >
+                                    <% doctors.forEach((row,index) => { %>
+                                    <% if (row.doctorname && row.slot) { %>
+                                        <% row.slot.map((timeSlot, index) => { %>
+                                            <option value=""><%= timeSlot.startTime %>-<%= timeSlot.endTime %></option> 
+                                            <% }) %>
+                                        </select>
+                                        <% } %>
+                                        <% }) %>     
+                      
                             <label for="cause">Cause</label>
                             <textarea id="cause" name="cause" rows="4"></textarea>
 
@@ -444,6 +479,7 @@
                 <div id="map"></div>
 
 
+                
                 <%- include('common/alert-timer.ejs') %>
                 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
@@ -457,6 +493,7 @@
                 <script src="/javascripts/script.js"></script>
                 <script src="/javascripts/slideshow.js"></script>
                         <script src="/javascripts/swiper.js"></script>
+                       
                 </body>
 
                 </html>
