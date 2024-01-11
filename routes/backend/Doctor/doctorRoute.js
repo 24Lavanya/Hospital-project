@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const doctorModel = require("../../../Models/doctor-model");
 const appoModel = require("../../../Models/appointment-model");
+
+
 router.get("/admin/add-doctor", (req, res) => {
   res.render("../views/frontend/doctor-form.ejs");
 });
@@ -53,18 +55,41 @@ router.get("/admin/doctor", async (req, res) => {
   }
 });
 
+router.get("/profile/getTimeSlots", async (req, res) => {
+  try {
+    //fetches the doctor selected so query is used to get data directly from url
+    const doctorName = req.query.doctor;
+    // Fetch the doctor based on the provided name
+    const doctor = await doctorModel.findOne({ doctorname: doctorName }).exec();
+
+    if (!doctor) {
+      // If the doctor is not found, return an empty array or an appropriate response
+      return res.json([]);
+    }
+
+    // Extract the time slots from the doctor's data
+    const timeSlots = doctor.slot.map(slot => `${slot.startTime}-${slot.endTime}`);
+
+    // Return the time slots in JSON format
+    res.json(timeSlots);
+    console.log(timeSlots)
+  } catch (error) {
+    console.error("Error fetching time slots:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
 router.get("/profile", async (req, res) => {
   try {
     const doctors = await doctorModel.find().exec();
     const bookedAppos = await appoModel.find().exec();
-    // console.log("Doctors data:", doctors);
+  
     if (req.isAuthenticated()) {
       //if i dont use this i cant req for username
-      const username = req.user.username;
+      const username = req.user.username;  
       res.render("../views/frontend/profile.ejs", {
         doctors,
         username,
-        bookedAppos,
+        bookedAppos
       });
     }
   } catch (error) {
@@ -74,6 +99,48 @@ router.get("/profile", async (req, res) => {
   }
 });
 
+
+// router.get('/profile/book', async (req, res) => {
+//   try {
+//     const doctors = await doctorModel.find().exec();
+//     const bookedAppos = await appoModel.find().exec();
+//     if (req.isAuthenticated()) {
+//       //if i dont use this i cant req for username
+//       const username = req.user.username;
+//       const selectedDoctor = req.session.selectedDoctor;  
+//       console.log('Selected Doctor:', selectedDoctor);
+//       res.render("../views/frontend/book.ejs", {
+//         doctors,
+//         username,
+//         bookedAppos,
+//         selectedDoctor
+//       });
+//     }
+//   } catch (error) {
+//     console.log(error);
+//     req.flash("danger", `Error: ${error}`);
+//     res.redirect("/profile"); // Redirect to handle errors
+//   }
+// })
+
+// router.post("/save-selected-doctor", (req, res) => {
+//   try {
+//     const selectedDoctor = req.body.selectedDoctor;
+//     // Save the selected doctor in the session
+//     req.session.selectedDoctor = selectedDoctor;
+//     console.log(selectedDoctor)
+//     res.json({ success: true });
+//   } catch (error) {
+//     console.error('Error saving selected doctor:', error);
+//     res.status(500).json({ success: false, error: error.message });
+//   }
+// });
+
+
+
+
+
+
 // Route handler
 router.get("/doc-ui", async (req, res) => {
   try {
@@ -81,6 +148,7 @@ router.get("/doc-ui", async (req, res) => {
     const appo = await appoModel.find({ status: "Pending" });
     // var appo = await appoModel.find({ status: 'Approved' }).exec();
     console.log(appo);
+    
     // console.log(doctors, appo);
     if (req.isAuthenticated()) {
       //if i dont use this i cant req for username
@@ -201,5 +269,9 @@ router.get("/admin/doctor/delete/:id", async (req, res) => {
     req.flash("danger", `Error:${error}`);
   }
 });
+
+
+
+    
 
 module.exports = router;

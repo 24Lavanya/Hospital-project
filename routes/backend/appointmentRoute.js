@@ -39,6 +39,9 @@ router.post("/admin/submit-appointment", async (req, res) => {
       status:'New',
     });
     
+    // const doc = req.body.doctorname;
+    // req.session.doc = doc; // Save selected doctor to session
+    // console.log('Selected Doctor:', doc);
     req.flash('success', 'Appointment booked!!!');
     
     res.redirect('/profile');
@@ -71,6 +74,8 @@ router.get('/admin/appointment/approved', async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 }) 
+
+
 router.post('/admin/appointment/approve-appointment/:id', async (req, res) => {
   try {
     const appointmentId = req.params.id;

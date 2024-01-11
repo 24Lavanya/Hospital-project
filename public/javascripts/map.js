@@ -129,34 +129,3 @@ const hideStatus = () => {
 };
 
 ///////////////////////////////////////////////////////////
-
-// const doctorName = document.querySelector("#doctorname");
-const slotSelect=(doctorname)=> {
-  console.log(doctorname.value);
-//   var selectedDoctor = this.value;
-//   var timeSelect = document.getElementById("time");
-
-//   // Fetch time slots for the selected doctor (replace with your logic)
-//   var doctorData = doctors.find(
-//     (doctor) => doctor.doctorname === selectedDoctor
-//   );
-//   var timeSlot = doctorData ? doctorData.slot : [];
-
-//   // Update the options in the time slot select
-//   timeSelect.innerHTML = "";
-//   if (timeSlot.length > 0) {
-//     // timeSelect.disabled = false;
-//     timeSlot.forEach(function (slot) {
-//       var option = document.createElement("option");
-//       option.value = slot.startTime + "-" + slot.endTime;
-//       option.text = slot.startTime + "-" + slot.endTime;
-//       timeSelect.appendChild(option);
-//     });
-//   } else {
-//     // timeSelect.disabled = true;
-//     var option = document.createElement("option");
-//     option.value = "";
-//     option.text = "No available time slots";
-//     timeSelect.appendChild(option);
-//   }
-};

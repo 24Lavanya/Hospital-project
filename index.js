@@ -33,9 +33,10 @@ app.use(express.json())
 //session middleware
 app.use(flash());
 app.use(expressSession({
+  secret: 'your-secret-key',
   resave: false,
   saveUninitialized: false,
-  secret:'hey hey hey'
+
 }))
 //passport
 app.use(passport.initialize());
@@ -63,7 +64,9 @@ app.get("/", (req, res) => {
   res.render('../views/frontend/create.ejs');
 });
 
-
+app.get("/sample", ( req, res )=> {
+  res.render('../views/frontend/sample.ejs')
+})
 
 //admin
 let admin = require("./routes/backend/admin");
