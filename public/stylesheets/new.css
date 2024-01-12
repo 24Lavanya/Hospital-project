@@ -21,7 +21,7 @@ a:hover {
 }
 .page1 {
   width: 100%;
-  background-color: #f6f6f2;
+  background-color: #ffffff;
   position: relative;
 }
 .navbar {
@@ -36,6 +36,11 @@ a:hover {
 .logo img {
   width: 100%;
   padding: 10px 20px;
+}
+.nav-wrapper{
+  display: flex;
+  width: 80%;
+  justify-content: space-around;
 }
 /* nav mid starts */
 #nav-mid {
@@ -145,7 +150,6 @@ a:hover {
   margin: 0 12px;
 }
 .banner {
-  height: 110vh;
   width: 100%;
   position: relative;
 }
@@ -165,16 +169,15 @@ a:hover {
 }
 video {
   width: 100%;
-  height: 86%;
+  height: 100%;
   object-fit: cover;
 }
 
 /* sticky */
 .service {
   border: 1px solid #ffffff45;
-  margin-top: -114px;
   display: flex;
-  /* border:2px solid red; */
+  margin: -4px 0;
 }
 .service a {
   display: flex;
@@ -331,9 +334,10 @@ video {
   position: absolute;
   background: #000;
   left: 10px;
-  top:65vw;
+  margin-top: 40px;
   height: 2px;
   width: 0%;
+  overflow: hidden;
   transition: 0.2s ease-in-out;
 }
 .find-doctor h2:hover::after {
@@ -349,9 +353,10 @@ video {
   position: absolute;
   background: #000;
   left: 10px;
-  top:108vw;
+  margin-top: 40px;
   height: 2px;
   width: 0%;
+  overflow: hidden;
   transition: 0.2s ease-in-out;
 }
 #service-head:hover::after {
@@ -448,7 +453,7 @@ video {
 
 #map {
   height: 80vh;
-  margin: 10px 50px;
+  margin: 10px 0px;
 }
 #directions {
   margin: 1em 4em;
@@ -456,43 +461,3 @@ video {
 
 /*MEDIA QUERIES*/
 
-@media (max-width: 1026px) {
-  #menu {
-    display: flex;
-    /* border:2px solid red; */
-    width: 100%;
-    text-align: end;
-    padding-right: 20px;
-  }
-  #nav-mid ul {
-    z-index: 1000;
-    padding: 20px;
-    transition: all 1s ease;
-    /* border:2px solid red; */
-    background-color: rgba(0, 0, 0, 0.7);
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: -500%;
-    right: 0%;
-    left: 0%;
-    text-align: center;
-  }
-  #nav-mid li {
-    margin: 10px 30px;
-  }
-  #nav-mid li a {
-    font-size: 26px;
-  }
-  .btns {
-    display: block;
-  }
-  .btn-green {
-    min-width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 10px auto;
-    padding: 12px;
-  }
-}

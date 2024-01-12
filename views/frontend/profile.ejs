@@ -25,99 +25,110 @@
         <div class="page1">
             <div class="navbar">
                 <div class="logo"><img src="/images/Logoremovedbackground.png" alt="logo"></div>
-                <div id="nav-mid">
-                    <h4><a href="#">Doctors</a></h4>
-                    <h4><a href="#">Services</a></h4>
-                    <h4><a href="#">Directions</a></h4>
-                </div>
-                <div id="nav-right">
-                    <a href="#book" class="btn-green">
-                        <i class="fas fa-calendar-week"></i>Book an appointment
-                    </a>
-                    <a href="#" class="btn-green message-box" id="message-box">
-                        <i class="fas fa-message"></i>
-                        <div class="status-box hidden">
-                            <div class="head">
-                                <h3>Appointment Status</h3>
-                                <hr>
-                            </div>
-                            <table class="status">
-                                <% bookedAppos.forEach((book)=> { %>
-                                    <% if (book.patientName===username) { %>
-                                        <tr>
-                                            <% if (book.status==='Approved' ) { %>
+                <div class="nav-wrapper">
+                    <div id="nav-mid">
+                        <h4><a href="#doctors-top">Doctors</a></h4>
+                        <h4><a href="#service-head">Services</a></h4>
+                        <h4><a href="#map">Directions</a></h4>
+                    </div>
+                    <div id="nav-right">
+                        <a href="#book" class="btn-green">
+                            <i class="fas fa-calendar-week"></i>Book an appointment
+                        </a>
+                        <a href="#" class="btn-green message-box" id="message-box">
+                            <i class="fas fa-message"></i>
+                            <div class="status-box hidden">
+                                <div class="head">
+                                    <h3>Appointment Status</h3>
+                                    <hr>
+                                </div>
+                                <table class="status">
+                                    <% bookedAppos.forEach((book)=> { %>
+                                        <% if (book.patientName===username) { %>
+                                            <tr>
+                                                <% if (book.status==='Approved' ) { %>
 
-                                                <td>Appointment on <%= book.date %> for slot <%= book.time %> with Dr.
-                                                            <%= book.doctorname %>
-                                                </td>
-                                                <td>
-                                                    <%= book.status %>
-                                                </td>
-                                                <td><a href="/profile/reject/<%= book._id %>">Delete</a></td>
-                                                <% } else if (book.status==='Rejected' ) { %>
                                                     <td>Appointment on <%= book.date %> for slot <%= book.time %> with
-                                                                Dr.<%= book.doctorname %>
+                                                                Dr.
+                                                                <%= book.doctorname %>
                                                     </td>
                                                     <td>
                                                         <%= book.status %>
                                                     </td>
                                                     <td><a href="/profile/reject/<%= book._id %>">Delete</a></td>
-                                                    <% } else if (book.status==='New' ){ %>
+                                                    <% } else if (book.status==='Rejected' ) { %>
                                                         <td>Appointment on <%= book.date %> for slot <%= book.time %>
-                                                                    with Dr.<%= book.doctorname %>
+                                                                    with
+                                                                    Dr.<%= book.doctorname %>
                                                         </td>
-                                                        <td>Pending</td>
+                                                        <td>
+                                                            <%= book.status %>
+                                                        </td>
                                                         <td><a href="/profile/reject/<%= book._id %>">Delete</a></td>
-                                                        <% }else if (book.status==='Pending' ) { %>
+                                                        <% } else if (book.status==='New' ){ %>
                                                             <td>Appointment on <%= book.date %> for slot <%= book.time
-                                                                        %> with Dr.<%= book.doctorname %>
+                                                                        %>
+                                                                        with Dr.<%= book.doctorname %>
                                                             </td>
-                                                            <td>
-                                                                <%= book.status %>
-                                                            </td>
+                                                            <td>Pending</td>
                                                             <td><a href="/profile/reject/<%= book._id %>">Delete</a>
                                                             </td>
-                                                            <% } %>
-                                        </tr>
+                                                            <% }else if (book.status==='Pending' ) { %>
+                                                                <td>Appointment on <%= book.date %> for slot <%=
+                                                                            book.time %> with Dr.<%= book.doctorname %>
+                                                                </td>
+                                                                <td>
+                                                                    <%= book.status %>
+                                                                </td>
+                                                                <td><a href="/profile/reject/<%= book._id %>">Delete</a>
+                                                                </td>
+                                                                <% } %>
+                                            </tr>
+                                            </p>
+                                            <% } %>
+                                                <% }) %>
 
+                                </table>
+                            </div>
+                            <hr>
+                        </a>
+                        <a href="/logout" class="btn-green">
+                            Logout
+                        </a>
+                    </div>
 
-
-
-                                        </p>
-                                        <% } %>
-                                            <% }) %>
-
-                            </table>
-                        </div>
-                        <hr>
-                    </a>
-                    <a href="/logout" class="btn-green">
-                        Logout
-                    </a>
                 </div>
-
             </div>
+
         </div>
 
-        <input type="checkbox" id="click">
-        <label for="click" class="hamburger">
-            <button id="menu">
-                <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14"
+
+        <!-- Mobile nav -->
+        <!-- Add this code inside the <body> tag -->
+<div class="mobile-nav">
+    <label for="click" class="hamburger">
+        <button id="menu">
+            <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14"
                     viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
-                    <path fill="#fff" path
+                    <path fill="#000" path
                         d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
                 </svg>
-            </button></label>
-        <input type="checkbox" id="click">
-        <label for="click" class="cross">
-            <button id="close">
-                <svg xmlns="http://www.w3.org/2000/svg" height="16" width="12"
+        </button>
+    </label>
+</div>
+
+<input type="checkbox" id="click">
+<label for="click" class="cross">
+    <button id="close">
+        <svg xmlns="http://www.w3.org/2000/svg" height="16" width="12"
                     viewBox="0 0 384 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
-                    <path fill="#ffffff"
+                    <path fill="#000"
                         d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
                 </svg>
-            </button></label>
+    </button>
+</label>
 
+       
     </div>
 
     <!-- video -->
@@ -127,44 +138,42 @@
         </div>
         <video autoplay loop muted>
             <source src="images/pexels-ron-lach-7579331 (2160p).mp4" type="video/mp4">
-        </video>
+        </video><!-- sticky -->
+        <div class="service">
+            <a href="#service-head">
+                <div class="service-content">
+                    Our Service Providers
+                    <div class="service-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                </div>
+
+            </a>
+            <a href="#book">
+                <div class="service-content">
+                    Book an Appointment
+                    <div class="service-icon">
+                        <i class="fas fa-calendar"></i>
+                    </div>
+                </div>
+
+            </a>
+            <a href="#">
+                <div class="service-content">
+                    Have an emergency ?
+                    <div class="service-icon">
+                        <i class="fas fa-phone-volume"></i>
+                    </div>
+                </div>
+                <div class="call-number">
+                    <p>Emergency Line</p>
+                    <h3>123-456-789</h3>
+                </div>
+
+            </a>
+        </div>
     </section>
 
-    <!-- sticky -->
-    <div class="service">
-        <a href="#services">
-            <div class="service-content">
-                Our Service Providers
-                <div class="service-icon">
-                    <i class="fas fa-heartbeat"></i>
-                </div>
-            </div>
-
-        </a>
-        <a href="#book">
-            <div class="service-content">
-                Book an Appointment
-                <div class="service-icon">
-                    <i class="fas fa-calendar"></i>
-                </div>
-            </div>
-
-        </a>
-        <a href="#">
-            <div class="service-content">
-                Have an emergency ?
-                <div class="service-icon">
-                    <i class="fas fa-phone-volume"></i>
-                </div>
-            </div>
-            <div class="call-number">
-                <p>Emergency Line</p>
-                <h3>123-456-789</h3>
-            </div>
-
-        </a>
-    </div>
-    </div>
 
     <!-- FIND DOCTORS -->
     <div id="doctors-top"></div>
@@ -234,7 +243,7 @@
     </div>
 
     <hr style="color: brown;">
-    
+
     <h2 id="service-head">Our Services</h2>
     <div class="response-out">
         <div class="response">
