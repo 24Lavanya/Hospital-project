@@ -6,6 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hospital management</title>
     <link rel="stylesheet" href="/stylesheets/sample.css">
+    <link rel="stylesheet" href="/stylesheets/akshay.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;1,200;1,300&display=swap"
+    rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+<link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.79.0/dist/L.Control.Locate.min.css" />
 </head>
 
 <body>
@@ -62,12 +71,246 @@
         </button>
     </header>
 
+    <div class="wrap-page">
+    <div class="banner">
+        <div class="banner-content">
+            <h1> Our expertise at your service</h1>
+        </div>
+        <video autoplay loop muted>
+            <source src="images/pexels-ron-lach-7579331 (2160p).mp4" type="video/mp4">
+        </video><!-- sticky -->
+        <div class="service">
+            <a href="#service-head">
+                <div class="service-content">
+                    Our Service Providers
+                    <div class="service-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                </div>
 
+            </a>
+            <a href="#book">
+                <div class="service-content">
+                    Book an Appointment
+                    <div class="service-icon">
+                        <i class="fas fa-calendar"></i>
+                    </div>
+                </div>
 
-    
-</div>
+            </a>
+            <a href="#">
+                <div class="service-content">
+                    Have an emergency ?
+                    <div class="service-icon">
+                        <i class="fas fa-phone-volume"></i>
+                    </div>
+                </div>
+                <div class="call-number">
+                    <p>Emergency Line</p>
+                    <h3>123-456-789</h3>
+                </div>
+
+            </a>
+        </div>
     </div>
+
+</div>   
+<!-- FIND DOCTORS -->
+<div id="doctors-top">
+    <h2 class="find">Our Top Doctors</h2>
+    <div id="doctors" class="find-doctor">
+        <!-- Slider main container -->
+        <div class="swiper">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <center>
+                                
+                                <div class="card">
+                                    <div class="card-card">
+                                        <img src="https://img.freepik.com/free-photo/portrait-doctor_144627-39391.jpg?t=st=1702397262~exp=1702397862~hmac=19c51c894d2243868e652290ae1584d420fd51370ca7255e70728e4bd894adfd"
+                                        alt="" srcset="">
+                                                    <div class="card-content">
+                                                        Dr. is
+                                                                    dedicated to delivering
+                                                                    top-notch medical care. Dr. combines skillful
+                                                                    precision with a
+                                                                    patient-centered approach. Dr. is committed to
+                                                                    ensuring the well-being
+                                                                    of each patient, backed by a passion for continuous
+                                                                    learning and staying
+                                                                    abreast of the latest advancements in the field."
+                                                    </div>
+                                    </div>
+                                </div>
+                            </center>
+                        </div>
+
+            </div>
+            <!-- If we need pagination -->
+            <div class="swiper-pagination"></div>
+
+            <!-- If we need navigation buttons -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+
+            <!-- If we need scrollbar -->
+            <div class="swiper-scrollbar"></div>
+        </div>
+    </div>
+</div>
+
+<hr style="color: brown;">
+<div class="service-wrap">
+<h2 id="service-head">Our Services</h2>
+<div class="response-out">
+    <div class="response">
+        <a href="javascript:void(0);">
+            <div class="response-bg"
+                style="background-image: url('https://images.unsplash.com/photo-1512678080530-7760d81faba6?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">
+            </div>
+            <div class="response-content">
+                <div class="response-icon">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <h2>Rooms</h2>
+                <p>Our hospital offers 300 rooms, including general, private, and suite accommodations, ensuring
+                    diverse patient needs are met. Our affordable healthcare starts at 800 per day, making quality
+                    medical care accessible to all.</p>
+                <button type="button" class="read-more mt-20px">Read-more
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </a>
+    </div>
+
+    <div class="response">
+        <a href="javascript:void(0);">
+            <div class="response-bg"
+                style="background-image: url('https://img.freepik.com/free-photo/interior-view-operating-room_1170-2254.jpg?w=996&t=st=1702788605~exp=1702789205~hmac=a8f13a4b7d84f25639752d4906f7b47805bd7407887b3678e42e7afa1af787fd');">
+            </div>
+            <div class="response-content">
+                <div class="response-icon">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <h2>Operation Theatre</h2>
+                <p>Our hospital features a modern Operating Theater (OT) where our skilled surgeons perform a
+                    variety of procedures using the latest medical advancements.</p>
+                <button type="button" class="read-more mt-20px">Read-more
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </a>
+    </div>
+    <div class="response">
+        <a href="javascript:void(0);">
+            <div class="response-bg"
+                style="background-image: url('https://img.freepik.com/free-photo/nurse-checking-pulse-female-patient-s-wrist_23-2147861479.jpg?w=996&t=st=1702788568~exp=1702789168~hmac=0415052990325f31113eeb075fe590d01c0c0f683c596acd5a4eb00d28394d4d');">
+            </div>
+            <div class="response-content">
+                <div class="response-icon">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <h2>Caring Staff</h2>
+                <p>Our hospital team of experienced and compassionate healthcare professionals is committed to
+                    providing the highest standard of care for our patients.</p>
+                <button type="button" class="read-more mt-20px">Read-more
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </a>
+    </div>
+    <div class="response">
+        <a href="javascript:void(0);">
+            <div class="response-bg"
+                style="background-image: url('https://img.freepik.com/free-photo/monitor-hospital-ward-showing-bmp-from-patient_482257-9697.jpg?t=st=1702788637~exp=1702789237~hmac=e4f53dc3b5cab6c3574693f7ea43c3e4ddf0e2e35ec31eb47a881686c37d384f');">
+            </div>
+            <div class="response-content">
+                <div class="response-icon">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <h2>Intensive Care Unit (ICU)</h2>
+                <p>Our Intensive Care Unit (ICU) is equipped with cutting-edge technology to provide round-the-clock
+                    critical care for patients in need of specialized attention.</p>
+                <button type="button" class="read-more mt-20px">Read-more
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </a>
+    </div>
+
+</div>
+</div>
+
+
+<!-- Services -->
+<div class="slideshow-wrap">
+<div class="slideshow-container" id="services">
+
+        <div class="mySlides fade">
+            <h2>Cardiac Surgeries</h2> <img src="https://images.unsplash.com/photo-1551601651-2a8555f1a136?q=80&w=1447&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            >
+        </div>
+
+
+
+
+        <div class="mySlides fade">
+            <h2>Orthopedic Surgeries</h2>
+            <img src="https://images.unsplash.com/photo-1597764690472-ec054f1c8637?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+           >
+        </div>
+
+        <div class="mySlides fade">
+            <h2>Neurosurgery</h2>
+            <img src="https://images.unsplash.com/photo-1631563019676-dade0dbdb8fc?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8TmV1cm9zdXJnZXJ5fGVufDB8fDB8fHww"
+            >
+        </div>
+
+        <div class="mySlides fade">
+            <h2>Blood Donation</h2>
+            <img src="https://images.unsplash.com/photo-1536856136534-bb679c52a9aa?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Ymxvb2QlMjBkb25hdGlvbnxlbnwwfHwwfHx8MA%3D%3D"
+            >
+        </div>
+
+        <div class="mySlides fade">
+            <h2>Ophthalmic Surgery</h2>
+            <img src="https://images.unsplash.com/photo-1632054227742-67e0e23595b0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8b3BodGhhbG1vbG9neXxlbnwwfHwwfHx8MA%3D%3D"
+            >
+        </div>
+
+        <div class="mySlides fade">
+            <h2>Dental Surgery</h2>
+            <img src="https://images.unsplash.com/photo-1489278353717-f64c6ee8a4d2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fERlbnRhbHxlbnwwfHwwfHx8MA%3D%3D"
+        >
+        </div>
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+
+    </div>
+<br>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
        <script src="/javascripts/respo.js"></script> 
+       
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+       integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+       crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+       integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+   <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.79.0/dist/L.Control.Locate.min.js"
+       charset="utf-8"></script>
+   <script src="https://kit.fontawesome.com/6f77f484da.js" crossorigin="anonymous"></script>
+   <script src="/javascripts/map.js"></script>
+   <script src="/javascripts/script.js"></script>
+   <script src="/javascripts/slideshow.js"></script>
+       <script src="/javascripts/swiper.js"></script>
+       <script src="/javascripts/slideshow.js"></script>
 </body>
 
 </html>

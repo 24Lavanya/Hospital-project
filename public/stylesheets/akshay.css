@@ -1,20 +1,40 @@
+.slideshow-wrap{
+  margin-top: 7em;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .slideshow-container {
   max-width: 700px;
+  height: 100vh;
   position: relative;
   margin: 5vh auto;
-  
+  overflow: hidden;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 
 .mySlides {
   display: none;
   position: relative;
-  /* border: 2px solid red; */
+  padding: 3.2em;
+  width: 100%;
+  height: 100vh;
+ box-shadow: 1px 1px black;
+}
 
+.mySlides h2{
+  padding: 10px; 
+  top:0;
+  text-align: center;
+  font-size: 34px; 
+  font-weight: bold; 
 }
 .mySlides img {
   width: 100%;
-  height: 50vh; 
+  height: 100%; 
   object-fit: cover;
 }
 
@@ -22,9 +42,9 @@
 .prev, .next {
   cursor: pointer;
   position: absolute;
-  top: 35%;
+  text-align: center;
+  top: 58%;
   width: 50px;
-  margin-top: -22px;
   color: black;
   font-weight: bold;
   font-size: 18px;
@@ -35,34 +55,24 @@
 
 
 .next {
-  right: -80px;
+  right: 0;
   border-radius: 3px 0 0 3px;
   
 
 }
 .prev{
-  left:-80px;
   border-radius: 3px 0 0 3px;
-  
-
 }
 
-
-/* .prev:hover, .next:hover {
-  background-color: rgba(0,0,0,0.8);
-} */
 #service-head{
   margin: 2px 45px;
 }
 .additional-box {
-  border: 4px solid skyblue;
+  /* border: 4px solid skyblue; */
   padding: 25px; 
   min-height: 40vh;
   margin: 10px 0; 
   border-radius: 10px; 
-  background-color:transparent; 
-  box-shadow: 0 0 15px #96d2fa; 
-
 }
 
 
@@ -74,17 +84,6 @@
 }
 
 
-.text {
-  color: #fff; 
-  font-size: 24px; 
-  font-weight: bold; 
-  padding: 10px; 
-  background-color: rgba(0, 0, 0, 0.5); 
-  position: absolute; 
-  top:0;
-  width: 100%; 
-  text-align: center; 
-}
 
 
 .fade {
@@ -95,4 +94,16 @@
 @keyframes fade {
   from {opacity: .4}
   to {opacity: 1}
+}
+
+@media(max-width:458px){
+  .slideshow-wrap{
+    margin-top: 10em;
+    height: auto;
+    border: 2px solid red;;
+  }
+  .mySlides img {
+    width: 296px;
+    height: 500px;
+  }
 }
