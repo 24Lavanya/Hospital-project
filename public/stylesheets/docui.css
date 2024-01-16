@@ -98,35 +98,69 @@ body {
   background: #fff;
   color: #61A3BA;
 }
-
-.patient-list{
+.patient-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 70vh;
+  border-top-left-radius: 10em;
   background-color: #fff;
-  min-height: 65vh;
-  border-top-left-radius:150px;
 }
-.schedule{
-  margin: 0 auto;
+
+.doc-appo {
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  padding: 20px;
   width: 80%;
 }
-.schedule h2{
-  font-size: 30px;
-  margin: 20px 0;
+
+.patient-list h2 {
+  color: #333;
+  margin: 1em;
+  font-size: 32px;
 }
-.schedule table{
-  border:1px solid black;
-  padding: 12px;
-  text-align: center;
-  min-width: 100%;
-  margin: auto;
+
+.doc-appo table {
+  width: 100%;
   border-collapse: collapse;
+  margin-top: 20px;
 }
-.schedule table th{
-  font-size: 20px;
-}
-.schedule table th,.schedule table td{
-  border:1px solid black;
+
+.doc-appo th, .doc-appo td {
   padding: 12px;
-  
+  text-align: left;
+}
+
+.doc-appo th {
+  background-color:#61A3BA;
+  color: white;
+}
+
+.doc-appo tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.doc-appo tr:hover {
+  background-color: #f1f1f1;
+}
+
+.btn {
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  padding: 6px;
+  color: #fff;
+  min-width: 100%;
+  margin: 10px 0;
+}
+
+#approve-btn {
+  background-color: #4CAF50;
+}
+
+#reject-btn {
+  background-color: #f44336;
 }
 /* Responsive Styles */
 @media (max-width: 768px) {
@@ -140,5 +174,159 @@ body {
 
   .doc-profile button {
     font-size: 14px;
+  }
+}
+
+.schedule{
+  background-color: #fff;
+  width: 100%;
+  height: 100vh;
+  display:flex;
+  flex-direction: column;
+}
+.schedule h2{
+  color: #333;
+  font-size: 32px; 
+  padding: 1em 0;
+  text-align: center;
+}
+.sch-list{
+  height: 50vh;
+  display: flex;
+
+}
+.sch-left{
+  padding: 1em 3em;
+  min-width: 50%;
+  color: navy;
+  text-align: center;
+  /* border-top-left-radius: 50%; */
+  border-top-right-radius: 50%;
+  border-bottom-left-radius: 50%;
+  background: #CADDFE;
+  /* box-shadow:  0px 7px 29px 0px; */
+}
+.appointment-item{
+  width: 50%;
+  padding: 1em;
+  margin: auto;
+  border-bottom: 0.5px solid navy;
+}
+.schedule-item{
+  border-bottom: 2px solid #333;
+  margin: 10px;
+  padding: 1em;
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: space-around;
+}
+.schedule-item {
+  border-bottom:1px solid #333 ;
+}
+.sch-right{
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border:2px solid red; */
+}
+.sch-right img{
+  min-width: 500px;
+  height: 100%;
+  object-fit: cover;
+  
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.hospital-footer {
+  background-color: #333;
+  color: #ecf0f1;
+  padding: 20px 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+}
+
+.footer-logo img {
+  width: 100px;
+  height: auto;
+}
+
+.footer-contact,
+.footer-links {
+  flex: 1;
+  margin-left: 20px;
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: #ecf0f1;
+  display: block;
+  margin-bottom: 5px;
+  transition: color 0.3s ease-in-out;
+}
+
+.footer-links a:hover {
+  color: #3498db;
+}
+
+.footer-social {
+  text-align: center;
+}
+
+.social-icons a {
+  color: #ecf0f1;
+  text-decoration: none;
+  margin: 10px ;
+  font-size: 20px;
+}
+.social-icons img{
+  margin: 10px 0;
+  width: 25px;
+}
+/* Add more styles for social icons as needed */
+
+@media screen and (max-width: 768px) {
+  .container {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .footer-content {
+      width: 100%;
+      margin-top: 20px;
+      text-align: center;
+  }
+
+  .footer-contact,
+  .footer-links {
+      margin-left: 0;
+      margin-top: 20px;
+  }
+
+  .footer-social {
+      text-align: center;
+      margin-top: 20px;
   }
 }

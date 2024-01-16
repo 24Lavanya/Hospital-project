@@ -100,66 +100,29 @@ router.get("/profile", async (req, res) => {
 });
 
 
-// router.get('/profile/book', async (req, res) => {
-//   try {
-//     const doctors = await doctorModel.find().exec();
-//     const bookedAppos = await appoModel.find().exec();
-//     if (req.isAuthenticated()) {
-//       //if i dont use this i cant req for username
-//       const username = req.user.username;
-//       const selectedDoctor = req.session.selectedDoctor;  
-//       console.log('Selected Doctor:', selectedDoctor);
-//       res.render("../views/frontend/book.ejs", {
-//         doctors,
-//         username,
-//         bookedAppos,
-//         selectedDoctor
-//       });
-//     }
-//   } catch (error) {
-//     console.log(error);
-//     req.flash("danger", `Error: ${error}`);
-//     res.redirect("/profile"); // Redirect to handle errors
-//   }
-// })
 
-// router.post("/save-selected-doctor", (req, res) => {
-//   try {
-//     const selectedDoctor = req.body.selectedDoctor;
-//     // Save the selected doctor in the session
-//     req.session.selectedDoctor = selectedDoctor;
-//     console.log(selectedDoctor)
-//     res.json({ success: true });
-//   } catch (error) {
-//     console.error('Error saving selected doctor:', error);
-//     res.status(500).json({ success: false, error: error.message });
-//   }
-// });
-
-
-
-
-
-
-// Route handler
+//Doctor UI
 router.get("/doc-ui", async (req, res) => {
   try {
     const doctors = await doctorModel.find().exec();
     const appo = await appoModel.find({ status: "Pending" });
-    // var appo = await appoModel.find({ status: 'Approved' }).exec();
+    const approved = await appoModel.find().exec();
     console.log(appo);
     
     // console.log(doctors, appo);
     if (req.isAuthenticated()) {
       //if i dont use this i cant req for username
       const username = req.user.username;
-      res.render("../views/frontend/doctorui.ejs", { doctors, username, appo });
+      res.render("../views/frontend/doctorui.ejs", { doctors, username, appo,approved });
     }
   } catch (error) {
     console.error(error);
     req.flash("danger", `Error: ${error}`);
   }
 });
+
+
+
 router.get('/profile/reject/:id', async (req, res) => {
   const id = req.params.id;
   try {
@@ -202,6 +165,55 @@ router.post("/doc-ui/reject-appointment/:id", async (req, res) => {
   }
 });
 //edit
+
+// router.get("/doc-ui/update/:id", async (req, res) => {
+//   const id = req.params.id;
+//   try {
+//     const doctor = await doctorModel.findById(id).exec();
+//     console.log('ID:', id);
+//     console.log(doctor);
+//     if (!doctor) {
+//       res.redirect("/doc-ui");
+//     }
+//     res.render("../views/frontend/update-doc.ejs", {
+//       doctor: doctor,  
+//     });
+//   } catch (error) {
+//     console.error(error);
+//     req.flash("danger", `Error: ${error}`);
+//     // Handle the error appropriately (redirect, render an error page, etc.)
+//   }
+// });
+
+
+// router.post("/doc-ui/update/:id", async (req, res) => {
+//   const id = req.params.id;
+
+//   try {
+//     const doctor = await doctorModel.findByIdAndUpdate(id, {
+//       phoneNo: req.body.Mobile,
+//       email: req.body.email,
+//       exp: req.body.exp,
+//       education: req.body.education,
+//       slot: req.body.startTime.map((startTime, index) => ({
+//         startTime: startTime,
+//         endTime: req.body.endTime[index],
+//       })),
+//       address: req.body.address,
+//     });
+
+//     if (!doctor) {
+//       return res.redirect("/doc-ui");
+//     }
+    
+
+//     res.redirect("/doc-ui");
+//   } catch (error) {
+//     console.error(error);
+//     req.flash("danger", `Error:${error}`);
+//   }
+// });
+
 router.get("/admin/doctor/edit/:id", async (req, res) => {
   const id = req.params.id;
   try {

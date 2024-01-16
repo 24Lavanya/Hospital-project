@@ -99,6 +99,18 @@ router.post('/admin/appointment/reject-appointment/:id', async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 });
+
+router.get('/admin/appointment/delete-appo/:id', async (req, res) => {
+  try {
+    const appointmentId = req.params.id;
+    const appoData = await appoModel.findByIdAndDelete(appointmentId, { status: "Pending" });
+    console.log(appoData)
+    res.redirect('/admin/appointment');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+});
 // Edit
 router.get('/admin/appointment/edit/:id', async (req, res) => {
   const id = req.params.id;

@@ -8,7 +8,20 @@
   body {
     font-family: Arial, sans-serif;
   }
-  
+  #btn-appr{
+    background-color: #27ae60;
+  }
+  #btn-rej{
+    background-color:rgb(199, 69, 69);
+  }
+  .btn-appo{
+    padding: 6px;
+    color: white;
+    text-align: center;
+    margin: 4px;
+    border: none;
+    width: 100%;
+  }
   #container {
     display: flex;
     width: 100%;
@@ -76,7 +89,9 @@
     background-color: aliceblue;
     padding: 12px;
     width: 122px;
+    border-radius: 5%;
     margin: 12px;
+    border: none;
   }
   .btn {
     background-color: #3498db;

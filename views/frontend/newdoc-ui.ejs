@@ -35,7 +35,7 @@
                     </a></button>  
                      -->
         <div class="btns">
-          <a href="/doc-ui/update" class="update-btn"> Update </a>
+          <a href="#" class="update-btn"> Update </a>
           <a href="/logout" class="update-btn"> Logout </a>
         </div>
       </div>
@@ -45,8 +45,8 @@
     <!-- Patients -->
 
     <div class="patient-list">
-      <h2>Appointment list</h2>
       <div class="doc-appo">
+        <h2>Appointment list</h2>
         <table>
           <thead>
             <th>Patient name</th>
@@ -61,6 +61,7 @@
            
               <% appo.forEach((appointment) => { %>
                 <% if (appointment.doctorname === username && appointment.status === 'Pending') { %>
+                  <%= console.log(appointment.doctorname) %>
                   <tr>
                     <td><%= appointment.patientName %></td>
                     <td><%= appointment.age %></td>
@@ -70,15 +71,19 @@
                     <td><%= appointment.time %></td>
                     <td>
                       <form action="/doc-ui/approve-appointment/<%= appointment._id %>" method="POST">
-                        <button type="submit" class="btn" id="approve-btn">Approve</button>
+                        <button type="submit" class="approve-btn">Approve</button>
                       </form>
                       <form action="/doc-ui/reject-appointment/<%= appointment._id %>" method="POST">
-                        <button type="submit" class="btn" id="reject-btn">Reject</button>
+                        <button type="submit" class="reject-btn">Reject</button>
                       </form>
                     </td>
-                    <% } %>
                   </tr>
-                  <% }); %>
+                <% } else { %>
+                  <tr>
+                    <td colspan="7">No pending appointments for the specified doctor.</td>
+                  </tr>
+                <% } %>
+              <% }); %>
             
           </tbody>
         </table>
@@ -91,69 +96,14 @@
      <div class="schedule">
          <h2>Schedule</h2>
          <div class="sch-list">
-          <div class="sch-left">
-                <% approved.forEach((appr, index) => { %>
-                    <% const appointmentDate = new Date(appr.date); %>
-                    <% const currentDate = new Date(); %>
-                    <% if (
-                        appr.doctorname === username &&
-                        appr.status === 'Approved' &&
-                        appointmentDate.getUTCFullYear() === currentDate.getUTCFullYear() &&
-                        appointmentDate.getUTCMonth() === currentDate.getUTCMonth() &&
-                        appointmentDate.getUTCDate() === currentDate.getUTCDate()
-                    ) { %>
-                        <div class="appointment-item">
-                            <p><strong>Patient Name:</strong> <%= appr.patientName %></p>
-                            <p><strong>Cause:</strong> <%= appr.cause %></p>
-                            <p><strong>Time:</strong> <%= appr.time %></p>
-                        </div>
-                    <% } %>
-                <% }); %>
-        </div>
-        
+             <div class="sch-left">
+               
+                
+                    </div>
            
                 
                      <div class="sch-right"><img src="https://static.vecteezy.com/system/resources/previews/015/316/843/original/schedule-doctor-appointment-2d-isolated-linear-illustration-healthcare-thin-line-flat-character-on-cartoon-background-colorful-editable-scene-for-mobile-website-presentation-vector.jpg" alt="" srcset=""></div>   
                     </div>
-                </div>
-
-                
-
-                <footer class="hospital-footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <img src="/images/Logoremovedbackground.png" alt="Hospital Logo">
-                </div>
-                <div class="footer-contact">
-                    <h4>Contact Us</h4>
-                    <p>123 Medical Street</p>
-                    <p>Mangalore, India</p>
-                    <p>Email: medcare@hospital.com</p>
-                    <p>Phone: 8587412589</p>
-                </div>
-                <div class="footer-links">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Services</a></li>
-                        <li><a href="#">Doctors</a></li>
-                        <li><a href="#">Appointments</a></li>
-                        <li><a href="#">Contact</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-social">
-                <h4>Follow Us</h4>
-                <div class="social-icons">
-                    <a href="#" target="_blank"><img src="/images/facebook_5968764.png" alt="" srcset=""></a>
-                    <a href="#" target="_blank"><img src="/images/instagram_2111463.png" alt="" srcset=""></a>
-                    <a href="#" target="_blank"><img src="/images/twitter_5968958.png" alt="" srcset=""></a>
-               
-                </div>
-            </div>
-        </div>
-    </footer>
-
+                   </div>
   </body>
 </html>

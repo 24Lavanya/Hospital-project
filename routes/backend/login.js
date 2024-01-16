@@ -8,7 +8,9 @@ passport.use(new localStrategy(userModel.authenticate()));
 let adminroute = require('./admin');
 router.use('',adminroute)
 
-
+router.get('/new-doc', (req, res) => {
+  res.render('../views/frontend/newdoc-ui.ejs')
+})
 router.get('/login', function (req, res, next) {
   res.render('../views/frontend/login.ejs',{error:req.flash("error")});
 });
@@ -20,7 +22,7 @@ router.get('/profile', function(req, res, next) {
 });
 
 router.get('/doc-ui', (req, res) => {
-  res.render('../views/frontend/doctorui.ejs')
+  res.render('/views/frontend/doctorui.ejs')
 })
 router.post("/register", function (req, res) {
   const { username,email,role } = req.body;

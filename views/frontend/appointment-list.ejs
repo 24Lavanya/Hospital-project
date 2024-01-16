@@ -65,15 +65,15 @@
                   <td><%= row.time %></td>
                   <td><%= row.cause %></td>
                   <td><center>
-                    <!-- <button class="btn-list" ><a href="/admin/appointment/edit/">Edit</a></button> -->
                     <form action="/admin/appointment/approve-appointment/<%= row._id %>"
                       method="POST">
-                      <button type="submit" class="approve-btn">Approve</button>
+                      <button type="submit" id="btn-appr" class="btn-appo">Approve</button>
                       </form>
                       <form action="/admin/appointment/reject-appointment/<%= row._id %>"
                           method="POST">
-                          <button type="submit" class="reject-btn">Reject</button>
+                          <button type="submit" id="btn-rej" class="btn-appo">Reject</button>
                       </form>
+                      <button class="btn-list"><a href="/admin/appointment/delete/<%= row._id %>">Delete</a></button></td>
                   </center></tr>
               <% }) %>
             </tbody>
@@ -81,4 +81,3 @@
         </form>
         <%- include('common/alert-timer.ejs') %>
 <%- include('common/footer.ejs') %>
-

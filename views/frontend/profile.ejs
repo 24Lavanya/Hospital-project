@@ -117,8 +117,6 @@
         </button>
     </header>
 
-        <!-- Mobile nav -->
-        <!-- Add this code inside the <body> tag -->
 
     <!-- video -->
 
@@ -160,7 +158,6 @@
                     <p>Emergency Line</p>
                     <h3>123-456-789</h3>
                 </div>
-
             </a>
         </div>
     </div>
@@ -174,7 +171,6 @@
         <div class="swiper">
             <!-- Additional required wrapper -->
             <div class="swiper-wrapper">
-
                 <% doctors.forEach((doctor)=> { %>
                     <% if (doctor.istop) { %>
                         <div class="swiper-slide">
@@ -397,7 +393,9 @@
                 <input type="tel" name="phone" required>
 
                 <label for="date">Preferred Date</label>
-                <input type="date" name="date" required>
+                <input type="date" name="date" id="appointmentDate" oninput="validateDate()" required>
+    
+                <span id="dateError" style="color: red;"></span>
 
                 <label for="cause">Cause</label>
                 <textarea id="cause" name="cause" rows="4"></textarea>
@@ -415,6 +413,18 @@
     <%- include('common/alert-timer.ejs') %>
     <script src="/javascripts/respo.js"></script>
         <script>
+            function validateDate() {
+        var selectedDate = new Date(document.getElementById("appointmentDate").value);
+        var currentDate = new Date();
+
+        if (selectedDate < currentDate) {
+            document.getElementById("dateError").innerHTML = "Please choose a present or future date.";
+            return false;
+        } else {
+            document.getElementById("dateError").innerHTML = "";
+            return true;
+        }
+    }
             function fetchTimeSlots(doctorName) {
                 // Make an AJAX request to the server to fetch available time slots
                 fetch(`/profile/getTimeSlots?doctor=${encodeURIComponent(doctorName)}`)
