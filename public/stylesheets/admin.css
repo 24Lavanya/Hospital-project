@@ -252,8 +252,21 @@
     border: 1px solid #ccc;
     border-radius: 4px;
   }
-  
- 
+  #timeSlotsContainer #remove{
+    background-color: rgb(233, 70, 70);
+    padding: 8px;
+    color: white;
+    border: none;
+  }
+  #timeSlotsContainer button{
+    background-color: #3498db;
+    padding: 8px;
+    color: white;
+    border: none;
+  }
+ #timeSlotsContainer td{
+  border: none;
+ }
   
   select {
     appearance: none;

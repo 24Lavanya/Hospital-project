@@ -165,7 +165,8 @@ body {
 /* Responsive Styles */
 @media (max-width: 768px) {
   .doc-profile img {
-    width: 80px;
+    width: 100%;
+    border-radius: 0;
   }
 
   .doc-profile .details {
@@ -328,5 +329,88 @@ body {
   .footer-social {
       text-align: center;
       margin-top: 20px;
+  }
+}
+@media screen and (max-width: 768px) {
+  /* Adjust styles for the doc-profile section */
+  .doc-profile {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .doc-img {
+    margin-bottom: 10px;
+  }
+
+  .details {
+    text-align: center;
+  }
+
+  /* Adjust styles for the table in the doc-appo section */
+  .doc-appo table {
+    font-size: 14px;
+  }
+
+  /* Adjust styles for the schedule section */
+  .schedule {
+    height: auto;
+  }
+
+  .sch-list {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .sch-left {
+    min-width: 100%;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .sch-right {
+    width: 100%;
+  }
+
+  .sch-right img {
+    min-width: 100%;
+    height: auto;
+  }
+}
+
+@media(max-width: 768px) {
+  .doc-appo table {
+    max-width: 100%;
+  }
+  
+  .doc-appo table {
+    width: 100%;
+    overflow-x: scroll;
+    white-space: nowrap; /* Prevent line breaks within table cells */
+  }
+
+  /* Adjust styles for the schedule section */
+  .schedule {
+    height: auto;
+  }
+
+  .sch-list {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .sch-left {
+    min-width: 100%;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .sch-right {
+    width: 100%;
+  }
+
+  .sch-right img {
+    min-width: 100%;
+    height: auto;
   }
 }

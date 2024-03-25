@@ -110,7 +110,11 @@ body{
     height: 2vh;
     /* border:2px solid red; */
   }
-
+  @media (max-width: 650px) {
+    .form-box {
+        width: 95%;
+    }
+}
  @media(max-width:650px) {
     
     .form-box{
