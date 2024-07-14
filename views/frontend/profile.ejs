@@ -45,7 +45,8 @@
                             </div>
                             <table class="status">
                                     <% bookedAppos.forEach((book)=> { %>
-                                        <% if (book.patientName===username) { %>
+                                         <% if (book.patientName===username) { %>  
+                                            <!-- Give patient name and username to be same while booking an appointment -->
                                             <tr>
                                                 <% if (book.status==='Approved' ) { %>
 
@@ -86,7 +87,7 @@
                                                                 <% } %>
                                             </tr>
                                             </p>
-                                            <% } %>
+                                             <% } %> 
                                                 <% }) %>
 
                                 </table>

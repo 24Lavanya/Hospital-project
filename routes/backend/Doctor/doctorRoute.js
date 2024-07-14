@@ -82,18 +82,26 @@ router.get("/profile", async (req, res) => {
   try {
     const doctors = await doctorModel.find().exec();
     const bookedAppos = await appoModel.find().exec();
-  
     if (req.isAuthenticated()) {
       //if i dont use this i cant req for username
       const username = req.user.username;  
-      res.render("../views/frontend/profile.ejs", {
-        doctors,
-        username,
-        bookedAppos
-      });
+      console.log('Doctors:', doctors);
+      console.log('Booked Appointments:', bookedAppos);
+      console.log('Username:', username);
+      console.log(bookedAppos.length)
+      if (!Array.isArray(bookedAppos)) {
+        console.error('bookedAppos is not an array:', bookedAppos);
+        req.flash('danger', 'Appointments data is not an array');
+        return res.redirect('/profile');
+      }
+
+      res.render("../views/frontend/profile.ejs", {doctors,username,bookedAppos});
+    } else {
+      req.flash('danger', 'You need to be logged in to view this page');
+      res.redirect('/login'); // Redirect to login if not authenticated
     }
   } catch (error) {
-    console.log(error);
+    console.error(error);
     req.flash("danger", `Error: ${error}`);
     res.redirect("/profile"); // Redirect to handle errors
   }
