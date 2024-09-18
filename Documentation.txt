@@ -1,0 +1,37 @@
+Start command->npx nodemon
+
+REQUIREMENTS:
+
+express: A web application framework for Node.js, used to build web applications.
+mongoose: An ODM (Object Data Modeling) library for MongoDB and Node.js, used to interact with the MongoDB database.
+body-parser: Middleware for parsing incoming request bodies. It is now built into Express, so you can use express.json() and express.urlencoded() instead.
+http-errors: A module for generating HTTP errors.
+path: A Node.js module for handling file paths.
+cookie-parser: Middleware for parsing cookies.
+morgan: A logging middleware for Node.js, used to log HTTP requests and errors.
+express-session: Middleware to manage user sessions.
+passport: Middleware for authentication.
+connect-flash and express-flash: Middleware for displaying flash messages (temporary messages between requests).
+
+
+Express session:
+secret: Secures the session ID by signing it with a key.
+resave: false: Prevents saving sessions back to the store if they haven't changed.
+saveUninitialized: false: Avoids storing empty sessions unless something is added to them.
+
+Passport Configuration:
+serializeUser and deserializeUser are used to manage user sessions with Passport. They control what information is stored in the session and how to retrieve user information.
+
+
+
+FEATURES:
+
+
+WHAT IF SOMEONE SIMPLY TRIES TO REGISTER AS A DOCTOR?
+ONLY IF A PERSON IS REGISTERED AS A DOCTOR BY THE ADMIN, ONLY THEN THE PERSON CAN CREATE AND LOGIN TO THE ACCOUNT.ELSE NOT ALLOWED.
+
+
+BOOK AN APPOINTMENT!!!
+ONLY THE DOCTORS IN THE LIST OF DOCTORS ARE LISTED AND THEIR TIME SLOT IS SHOWN TO CHOOSE.
+
+

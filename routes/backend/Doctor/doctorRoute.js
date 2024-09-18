@@ -81,10 +81,12 @@ router.get("/profile/getTimeSlots", async (req, res) => {
 router.get("/profile", async (req, res) => {
   try {
     const doctors = await doctorModel.find().exec();
-    const bookedAppos = await appoModel.find().exec();
+    const userId = req.user._id.toString();
+    const bookedAppos = await appoModel.find({userId}).exec();
     if (req.isAuthenticated()) {
       //if i dont use this i cant req for username
       const username = req.user.username;  
+      const userId = req.user._id;
       console.log('Doctors:', doctors);
       console.log('Booked Appointments:', bookedAppos);
       console.log('Username:', username);
@@ -95,7 +97,7 @@ router.get("/profile", async (req, res) => {
         return res.redirect('/profile');
       }
 
-      res.render("../views/frontend/profile.ejs", {doctors,username,bookedAppos});
+      res.render("../views/frontend/profile.ejs", {doctors,username,userId,bookedAppos});
     } else {
       req.flash('danger', 'You need to be logged in to view this page');
       res.redirect('/login'); // Redirect to login if not authenticated
@@ -145,14 +147,19 @@ router.get('/profile/reject/:id', async (req, res) => {
     req.flash('danger', `Error: ${error}`);
   }
 });
+
+
 router.post("/doc-ui/approve-appointment/:id", async (req, res) => {
   try {
     const appointmentId = req.params.id;
+    const appro = await appoModel.findByIdAndUpdate(appointmentId, { status: "Approved" }, { new: true });
+    
+    if (!appro) {
+      return res.status(404).send("Appointment not found");
+    }
 
-    const appro = await appoModel.findByIdAndUpdate(appointmentId, {
-      status: "Approved",
-    });
-    console.log(appro);
+    console.log('Approved Appointment:', appro);
+    req.flash('success', 'Appointment approved successfully');
     res.redirect("/doc-ui");
   } catch (error) {
     console.error(error);
@@ -163,15 +170,22 @@ router.post("/doc-ui/approve-appointment/:id", async (req, res) => {
 router.post("/doc-ui/reject-appointment/:id", async (req, res) => {
   try {
     const appointmentId = req.params.id;
+    const reject = await appoModel.findByIdAndUpdate(appointmentId, { status: "Rejected" }, { new: true });
+    
+    if (!reject) {
+      return res.status(404).send("Appointment not found");
+    }
 
-    await appoModel.findByIdAndUpdate(appointmentId, { status: "Rejected" });
-
+    console.log('Rejected Appointment:', reject);
+    req.flash('success', 'Appointment rejected successfully');
     res.redirect("/doc-ui");
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");
   }
 });
+
+
 //edit
 
 // router.get("/doc-ui/update/:id", async (req, res) => {

@@ -43,9 +43,12 @@
                                 <h3>Appointment Status</h3>
                                
                             </div>
+                            <% console.log('EJS template rendering with data:', bookedAppos); %>
                             <table class="status">
                                     <% bookedAppos.forEach((book)=> { %>
-                                         <% if (book.patientName===username) { %>  
+                                        <% if (book.userId.toString() === userId.toString()) { %>
+                                            <!-- <% console.log('Yooooooxoooooooooooooooooo Username:', username, 'Status:', book.status); %> -->
+                                            
                                             <!-- Give patient name and username to be same while booking an appointment -->
                                             <tr>
                                                 <% if (book.status==='Approved' ) { %>

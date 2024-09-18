@@ -33,7 +33,12 @@ const appointmentSchema = new mongoose.Schema({
         type: String,
         enum: ['New','Pending', 'Approved', 'Rejected'],
         default: 'New',
-  } 
+  },
+  userId: { // Add this field to track which user booked the appointment
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User', // Reference the User model
+    required: true
+  }
     
 });
   

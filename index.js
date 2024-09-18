@@ -24,8 +24,12 @@ mongoose
 
 
 app.set("view engine", "ejs");
-app.use(express.static(__dirname + "/public/"));
+app.use(express.static(__dirname + "/public/"));    // Serves static files (CSS, JS, images) from the public directory.
 app.set(express.static(__dirname,+ '/views/'));
+
+// These middleware functions parse incoming request bodies. 
+// urlencoded is for form submissions, and json is for JSON payloads.
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
@@ -38,6 +42,7 @@ app.use(expressSession({
   saveUninitialized: false,
 
 }))
+
 //passport
 app.use(passport.initialize());
 app.use(passport.session());
@@ -48,15 +53,19 @@ app.use((req, res, next) => {
   res.locals.message = req.flash('message');
   next();
 })
-// app.use((req, res, next) => {
-//   res.locals.messages = require('express-messages')(req, res);
-//   next();
-// });
+
+app.use(flash());
+
+// Set flash messages to be available globally in all views
+app.use((req, res, next) => {
+  res.locals.success = req.flash('success');
+  res.locals.error = req.flash('error');
+  next();
+});
 
 
-var indexRouter = require('./routes/backend/login');
+var loginRouter = require('./routes/backend/login');
 var usersRouter = require('./routes/backend/users');
-
 
 
 
@@ -64,21 +73,24 @@ app.get("/", (req, res) => {
   res.render('../views/frontend/create.ejs');
 });
 
-app.get("/sample", ( req, res )=> {
-  res.render('../views/frontend/sample.ejs')
-})
+
 
 //admin
 let admin = require("./routes/backend/admin");
+
+//department
 let dept = require("./routes/backend/Department/departmentlistRoute");
 let addDept = require("./routes/backend/Department/departmentRoute");
+
 //doctor
 let doc = require("./routes/backend/Doctor/doctorlistRoute");
 let addDoc = require("./routes/backend/Doctor/doctorRoute");
+
 //patient
 let pat = require("./routes/backend/Patient/patientlistRoute");
 let addPat = require("./routes/backend/Patient/patientRoute");
 
+//appointment
 let appo = require('./routes/backend/appointmentListRoute');
 let addAppo = require("./routes/backend/appointmentRoute");
 
@@ -104,26 +116,16 @@ passport.serializeUser(usersRouter.serializeUser());
 passport.deserializeUser(usersRouter.deserializeUser());
 
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('./backend/users.js', usersRouter);
+app.use('/', loginRouter);
+// app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
 
-// error handler
-// app.use(function(err, req, res, next) {
-//   // set locals, only providing error in development
-//   res.locals.message = err.message;
-//   res.locals.error = req.app.get('env') === 'development' ? err : {err};
-
-//   // render the error page
-//   res.status(err.status || 500);
-//   res.render('error');
-// });
 
 app.use(function(err, req, res, next) {
   res.locals.message = req.flash('error') || 'Internal Server Error';

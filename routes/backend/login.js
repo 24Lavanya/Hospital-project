@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const userModel=require("./users");
+const doctorModel =require("../../Models/doctor-model.js")
 const passport = require('passport');
 const localStrategy = require("passport-local");
 passport.use(new localStrategy(userModel.authenticate()));
@@ -24,17 +25,43 @@ router.get('/profile', function(req, res, next) {
 router.get('/doc-ui', (req, res) => {
   res.render('/views/frontend/doctorui.ejs')
 })
-router.post("/register", function (req, res) {
-  const { username,email,role } = req.body;
+
+router.post("/register", async function (req, res) {
+  const { username, email, role } = req.body;
+
+  // Check if the role is 'doctor' and verify if the doctor is in the admin's list
+  if (role === 'doctor') {
+    try {
+      // Check if the doctor exists in the admin's database
+      const existingDoctor = await doctorModel.findOne({ doctorname: username });
+
+      if (!existingDoctor) {
+        req.flash("error", "Sorry, you are not registered as a doctor yet.");
+        return res.redirect("/register");
+      }
+    } catch (error) {
+      console.error("Error checking doctor:", error);
+      req.flash("error", "An error occurred while checking doctor information.");
+      return res.redirect("/register");
+    }
+  }
+
+  // Proceed with registration if the doctor is valid or role is not 'doctor'
   const userData = new userModel({ username, email, role });
   userModel.register(userData, req.body.password)
     .then(function () {
       passport.authenticate("local")(req, res, function () {
-        console.log(userData)
+        console.log(userData);
         res.redirect("/login");
+      });
     })
-  })
-})
+    .catch((error) => {
+      console.error("Error during registration:", error);
+      req.flash("error", "Registration failed. Please try again.");
+      res.redirect("/register");
+    });
+});
+
 
 
 router.post("/login", passport.authenticate("local", {
